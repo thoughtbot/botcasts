@@ -1,0 +1,245 @@
+GIT
+  remote: https://github.com/rails/rails.git
+  revision: 69296dd7162d3524ce88ab1476896ad7474d4e84
+  branch: main
+  specs:
+    actioncable (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      nio4r (~> 2.0)
+      websocket-driver (>= 0.6.1)
+      zeitwerk (~> 2.6)
+    actionmailbox (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      activejob (= 7.1.0.alpha)
+      activerecord (= 7.1.0.alpha)
+      activestorage (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      mail (>= 2.7.1)
+      net-imap
+      net-pop
+      net-smtp
+    actionmailer (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      actionview (= 7.1.0.alpha)
+      activejob (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      mail (~> 2.5, >= 2.5.4)
+      net-imap
+      net-pop
+      net-smtp
+      rails-dom-testing (~> 2.0)
+    actionpack (7.1.0.alpha)
+      actionview (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      rack (~> 2.0, >= 2.2.4)
+      rack-test (>= 0.6.3)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actiontext (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      activerecord (= 7.1.0.alpha)
+      activestorage (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      globalid (>= 0.6.0)
+      nokogiri (>= 1.8.5)
+    actionview (7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      builder (~> 3.1)
+      erubi (~> 1.11)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    activejob (7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      globalid (>= 0.3.6)
+    activemodel (7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+    activerecord (7.1.0.alpha)
+      activemodel (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+    activestorage (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      activejob (= 7.1.0.alpha)
+      activerecord (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      marcel (~> 1.0)
+      mini_mime (>= 1.1.0)
+    activesupport (7.1.0.alpha)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    rails (7.1.0.alpha)
+      actioncable (= 7.1.0.alpha)
+      actionmailbox (= 7.1.0.alpha)
+      actionmailer (= 7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      actiontext (= 7.1.0.alpha)
+      actionview (= 7.1.0.alpha)
+      activejob (= 7.1.0.alpha)
+      activemodel (= 7.1.0.alpha)
+      activerecord (= 7.1.0.alpha)
+      activestorage (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      bundler (>= 1.15.0)
+      railties (= 7.1.0.alpha)
+    railties (7.1.0.alpha)
+      actionpack (= 7.1.0.alpha)
+      activesupport (= 7.1.0.alpha)
+      method_source
+      rake (>= 12.2)
+      thor (~> 1.0)
+      zeitwerk (~> 2.6)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
+    bindex (0.8.1)
+    bootsnap (1.13.0)
+      msgpack (~> 1.2)
+    builder (3.2.4)
+    capybara (3.37.1)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
+    childprocess (4.1.0)
+    concurrent-ruby (1.1.10)
+    connection_pool (2.3.0)
+    crass (1.0.6)
+    debug (1.6.2)
+      irb (>= 1.3.6)
+      reline (>= 0.3.1)
+    error_highlight (0.4.0)
+    erubi (1.11.0)
+    globalid (1.0.0)
+      activesupport (>= 5.0)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+    importmap-rails (1.1.5)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
+    io-console (0.5.11)
+    irb (1.4.2)
+      reline (>= 0.3.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
+    loofah (2.19.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
+    mail (2.7.1)
+      mini_mime (>= 0.1.1)
+    marcel (1.0.2)
+    matrix (0.4.2)
+    method_source (1.0.0)
+    mini_mime (1.1.2)
+    minitest (5.16.3)
+    msgpack (1.6.0)
+    net-imap (0.3.1)
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.1.3)
+      timeout
+    net-smtp (0.3.2)
+      net-protocol
+    nio4r (2.5.8)
+    nokogiri (1.13.9-x86_64-darwin)
+      racc (~> 1.4)
+    pg (1.4.4)
+    propshaft (0.6.4)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
+    public_suffix (5.0.0)
+    puma (5.6.5)
+      nio4r (~> 2.0)
+    racc (1.6.0)
+    rack (2.2.4)
+    rack-test (2.0.2)
+      rack (>= 1.3)
+    rails-dom-testing (2.0.3)
+      activesupport (>= 4.2.0)
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.4.3)
+      loofah (~> 2.3)
+    rake (13.0.6)
+    redis (4.8.0)
+    regexp_parser (2.6.0)
+    reline (0.3.1)
+      io-console (~> 0.5)
+    rexml (3.2.5)
+    rubyzip (2.3.2)
+    selenium-webdriver (4.5.0)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
+    stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.21-x86_64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.21-x86_64-linux)
+      railties (>= 6.0.0)
+    thor (1.2.1)
+    timeout (0.3.0)
+    turbo-rails (1.3.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+    tzinfo (2.0.5)
+      concurrent-ruby (~> 1.0)
+    web-console (4.2.0)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
+    webdrivers (5.2.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (~> 4.0)
+    websocket (1.2.9)
+    websocket-driver (0.7.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.5)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
+    zeitwerk (2.6.6)
+
+PLATFORMS
+  x86_64-darwin-20
+
+DEPENDENCIES
+  bootsnap
+  capybara
+  debug
+  error_highlight (>= 0.4.0)
+  importmap-rails
+  jbuilder
+  pg (~> 1.1)
+  propshaft
+  puma (~> 5.0)
+  rails!
+  redis (~> 4.0)
+  selenium-webdriver
+  stimulus-rails
+  tailwindcss-rails
+  turbo-rails
+  tzinfo-data
+  web-console
+  webdrivers
+
+RUBY VERSION
+   ruby 3.1.0p0
+
+BUNDLED WITH
+   2.3.17
