@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/citizensadvice/capybara_accessible_selectors.git
+  revision: 392fec2d49c66f56f53c85c659b60d24e2ae54d3
+  branch: main
+  specs:
+    capybara_accessible_selectors (0.9.0)
+      capybara (>= 3.36.0)
+
+GIT
   remote: https://github.com/rails/rails.git
   revision: 51f81267f8e2769d847cc563967feffefe6e2beb
   branch: main
@@ -337,6 +345,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  capybara_accessible_selectors!
   debug
   devise
   error_highlight (>= 0.4.0)
