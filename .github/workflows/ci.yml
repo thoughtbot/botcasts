@@ -1,0 +1,43 @@
+name: CI
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - "5432:5432"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 2s
+          --health-timeout 2s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - uses: "ruby/setup-ruby@v1"
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+
+      - name: Build and run tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          RUBYOPT: --yjit
+          STANDARDOPTS: "-d"
+        run: |
+          bin/setup
+          bin/rails standard test:all
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Capybara screenshots
+          path: ${{ github.workspace }}/tmp/capybara/**/*.png
