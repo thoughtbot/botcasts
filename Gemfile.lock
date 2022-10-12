@@ -103,6 +103,16 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
 
+GIT
+  remote: https://github.com/thoughtbot/action_dispatch-testing-integration-capybara.git
+  revision: c2393cb699335d82c599e954303903b30264378c
+  tag: v0.1.0
+  specs:
+    action_dispatch-testing-integration-capybara (0.1.0)
+      actionpack
+      activesupport
+      capybara
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -343,6 +353,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action_dispatch-testing-integration-capybara!
   bootsnap
   capybara
   capybara_accessible_selectors!
