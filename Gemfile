@@ -70,6 +70,9 @@ group :development do
 end
 
 group :test do
+  gem "action_dispatch-testing-integration-capybara",
+    github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.1.0",
+    require: "action_dispatch/testing/integration/capybara/minitest"
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "capybara_accessible_selectors", github: "citizensadvice/capybara_accessible_selectors", branch: "main"
