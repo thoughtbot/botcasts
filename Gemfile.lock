@@ -143,7 +143,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    error_highlight (0.4.0)
     erubi (1.11.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -189,6 +188,8 @@ GEM
     net-smtp (0.3.2)
       net-protocol
     nio4r (2.5.8)
+    nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
     nokogiri (1.13.9-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -286,6 +287,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   action_dispatch-testing-integration-capybara!
@@ -294,7 +296,6 @@ DEPENDENCIES
   capybara_accessible_selectors!
   debug
   devise
-  error_highlight (>= 0.4.0)
   factory_bot_rails
   image_processing (~> 1.2)
   importmap-rails
@@ -314,7 +315,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.1.0p0
+   ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.17
+   2.3.23

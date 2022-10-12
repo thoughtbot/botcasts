@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.0.0"
+ruby "3.1.2"
 
 # Use specific branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
@@ -65,8 +65,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
 group :test do
