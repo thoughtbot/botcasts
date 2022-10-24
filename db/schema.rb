@@ -52,6 +52,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_180543) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "episodes", force: :cascade do |t|
+    t.bigint "podcast_id"
+    t.text "title", null: false
+    t.text "guid", null: false
+    t.datetime "published_at", null: false
+    t.text "episode_type", null: false
+    t.text "season"
+    t.text "subtitle", default: "", null: false
+    t.interval "duration", null: false
+    t.boolean "explicit", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["podcast_id", "guid"], name: "index_episodes_on_podcast_id_and_guid", unique: true
+    t.index ["podcast_id"], name: "index_episodes_on_podcast_id"
+  end
+
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,6 +155,22 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_180543) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "podcasts", force: :cascade do |t|
+    t.text "author", null: false
+    t.text "copyright", null: false
+    t.text "description", null: false
+    t.text "episode_type", null: false
+    t.boolean "explicit", default: false, null: false
+    t.text "keywords", default: [], null: false, array: true
+    t.text "language", null: false
+    t.datetime "published_at", null: false
+    t.text "subtitle", default: "", null: false
+    t.text "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title", "author", "episode_type"], name: "index_podcasts_on_title_and_author_and_episode_type", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -167,4 +199,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_06_10_180543) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "episodes", "podcasts"
 end

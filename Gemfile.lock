@@ -104,6 +104,13 @@ GIT
       zeitwerk (~> 2.6)
 
 GIT
+  remote: https://github.com/ruby/rss.git
+  revision: 6284574bb034773c57f402aa9fc725993570fe6a
+  specs:
+    rss (0.3.0)
+      rexml
+
+GIT
   remote: https://github.com/thoughtbot/action_dispatch-testing-integration-capybara.git
   revision: c2393cb699335d82c599e954303903b30264378c
   tag: v0.1.0
@@ -381,6 +388,7 @@ DEPENDENCIES
   puma (~> 6.0)
   rails!
   redis (~> 4.0)
+  rss!
   selenium-webdriver
   standard
   stimulus-rails
