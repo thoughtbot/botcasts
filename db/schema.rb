@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_10_18_170036) do
+ActiveRecord::Schema[7.1].define(version: 2022_10_23_220840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,6 +53,22 @@ ActiveRecord::Schema[7.1].define(version: 2022_10_18_170036) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "episodes", force: :cascade do |t|
+    t.bigint "podcast_id"
+    t.text "title", null: false
+    t.text "guid", null: false
+    t.datetime "published_at", null: false
+    t.text "episode_type", null: false
+    t.text "season"
+    t.text "subtitle", default: "", null: false
+    t.interval "duration", null: false
+    t.boolean "explicit", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["podcast_id", "guid"], name: "index_episodes_on_podcast_id_and_guid", unique: true
+    t.index ["podcast_id"], name: "index_episodes_on_podcast_id"
+  end
+
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,6 +108,22 @@ ActiveRecord::Schema[7.1].define(version: 2022_10_18_170036) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "podcasts", force: :cascade do |t|
+    t.text "author", null: false
+    t.text "copyright", null: false
+    t.text "description", null: false
+    t.text "episode_type", null: false
+    t.boolean "explicit", default: false, null: false
+    t.text "keywords", default: [], null: false, array: true
+    t.text "language", null: false
+    t.datetime "published_at", null: false
+    t.text "subtitle", default: "", null: false
+    t.text "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title", "author", "episode_type"], name: "index_podcasts_on_title_and_author_and_episode_type", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -112,10 +144,13 @@ ActiveRecord::Schema[7.1].define(version: 2022_10_18_170036) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "episodes", "podcasts"
 end
