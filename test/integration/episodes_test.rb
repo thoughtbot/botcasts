@@ -12,8 +12,15 @@ module Episodes
           assert_selector :element, "time", datetime: episode.published_at.to_date.iso8601
           assert_text episode.subtitle
           assert_link episode.title, href: podcast_episode_path(episode.podcast, episode)
-          assert_selector :element, "form", action: podcast_episode_path(episode.podcast, episode), method: false do |form|
-            form.has_button?("Play episode #{episode.title}", text: "Listen")
+          assert_selector :element, "form", action: podcast_episode_path(episode.podcast, episode), method: false,
+            "data-action": "submit->application#preventDefault:reload",
+            "data-turbo-frame": "audio" do |form|
+            form.has_button?("Play episode #{episode.title}", text: "Listen") do |button|
+              button.matches_selector? :element, "button",
+                "data-controller": /play-button/,
+                "data-play-button-player-outlet": "#" + dom_id(episode, :audio),
+                "data-action": /click->play-button#toggle/
+            end
           end
           assert_link "Show notes for episode #{episode.title}", text: "Show notes", href: podcast_episode_path(episode.podcast, episode)
         end
@@ -40,8 +47,8 @@ module Episodes
 
       get podcast_episodes_path(episode.podcast)
 
-      within :element, id: "player" do
-        assert_selector :element, id: "audio"
+      within :element, id: "player", "data-turbo-permanent": true do
+        assert_selector :element, "turbo-frame", id: "audio", target: "_top"
       end
     end
 
@@ -83,12 +90,19 @@ module Episodes
       get podcast_episode_path(episode.podcast, episode)
 
       within :article do
-        assert_selector :element, "form", action: false, method: false do |form|
-          form.has_button? "Play"
-        end
+        assert_selector :element, "form", action: false, method: false,
+          "data-action": "submit->application#preventDefault:reload",
+          "data-turbo-frame": "audio" do |form|
+            form.has_selector? :element, "button", text: "Play",
+              "data-controller": /play-button/,
+              "data-play-button-player-outlet": "#" + dom_id(episode, :audio),
+              "data-action": /click->play-button#toggle/
+          end
       end
       within :main do
-        assert_selector :element, "audio"
+        within :element, "turbo-frame", id: "audio", target: "_top" do
+          assert_selector :element, "audio", id: dom_id(episode, :audio), controls: true
+        end
       end
     end
 
@@ -112,8 +126,8 @@ module Episodes
 
       get podcast_episode_path(episode.podcast, episode)
 
-      within :element, id: "player" do
-        within :element, id: "audio" do
+      within :element, id: "player", "data-turbo-permanent": true do
+        within :element, "turbo-frame", id: "audio", target: "_top" do
           assert_link episode.title, href: podcast_episode_path(episode.podcast, episode)
           assert_selector :element, "audio", id: dom_id(episode, :audio), controls: true
         end
