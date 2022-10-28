@@ -53,9 +53,16 @@ module SearchResults
             assert_selector "mark", text: query
           end
           assert_link included.title, href: podcast_episode_path(podcast, included)
-          assert_selector :element, "form", action: podcast_episode_path(podcast, included), method: false do |form|
-            form.has_button?("Play episode #{included.title}", text: "Listen")
-          end
+          assert_selector :element, "form", action: podcast_episode_path(podcast, included), method: false,
+            "data-action": "submit->application#preventDefault:reload",
+            "data-turbo-frame": "audio" do |form|
+              form.has_button?("Play episode #{included.title}", text: "Listen") do |button|
+                button.matches_selector? :element, "button",
+                  "data-controller": /play-button/,
+                  "data-play-button-player-outlet": "#" + dom_id(included, :audio),
+                  "data-action": /click->play-button#toggle/
+              end
+            end
           assert_link "Show notes for episode #{included.title}", text: "Show notes", href: podcast_episode_path(podcast, included)
         end
       end
@@ -66,8 +73,8 @@ module SearchResults
 
       get podcast_search_results_path(podcast)
 
-      within :element, id: "player" do
-        assert_selector :element, id: "audio"
+      within :element, id: "player", "data-turbo-permanent": true do
+        assert_selector :element, "turbo-frame", id: "audio", target: "_top"
       end
     end
   end

@@ -12,8 +12,13 @@
           <p class="mt-1 text-base leading-7 text-slate-700"><%= episode.subtitle %></p>
 
           <div class="mt-4 flex items-center gap-4">
-            <form action="<%= podcast_episode_path(episode.podcast, episode) %>">
-              <button class="group flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900">
+            <form action="<%= podcast_episode_path(episode.podcast, episode) %>"
+                  data-action="submit->application#preventDefault:reload"
+                  data-turbo-frame="audio">
+              <button class="group flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900"
+                      data-controller="play-button"
+                      data-play-button-player-outlet="#<%= dom_id(episode, :audio) %>"
+                      data-action="click->play-button#toggle">
                 <% with_options class: "h-2.5 w-2.5 fill-current" do |styled| %>
                   <div class="block group-aria-pressed:hidden">
                     <span class="sr-only">Play episode <%= episode.title %></span>
