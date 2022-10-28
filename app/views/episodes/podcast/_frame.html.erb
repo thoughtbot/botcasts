@@ -1,0 +1,101 @@
+<header class="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120"><div class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]">
+    <span class="font-mono text-slate-500">Hosted by</span><span class="mt-6 flex gap-6 font-bold text-slate-900"><%= podcast.author %></span>
+  </div>
+  <div class="relative z-10 mx-auto px-4 pb-4 pt-10 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:py-12 lg:px-8 xl:px-12">
+    <%= link_to podcast_episodes_path(podcast), class: "relative mx-auto block w-48 overflow-hidden rounded-lg bg-slate-200 shadow-xl shadow-slate-200 sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl", aria: {label: podcast.title} do %>
+      <%= image_tag podcast.image.representation(resize_to_fit: [960, 960]), class: "w-full", width: 960, height: 960, decoding: "async" %>
+      <div class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 sm:rounded-xl lg:rounded-2xl"></div>
+    <% end %>
+
+    <div class="mt-10 text-center lg:mt-12 lg:text-left">
+      <p class="text-xl font-bold text-slate-900">
+        <%= link_to podcast.title, podcast_episodes_path(podcast) %>
+      </p>
+      <p class="mt-3 text-lg font-medium leading-8 text-slate-700"><%= podcast.subtitle %></p>
+    </div>
+
+    <section class="mt-12 hidden lg:block">
+      <h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
+        <%= inline_svg_tag "icons/graph.svg", class: "h-2.5 w-2.5" %>
+        <span class="ml-2.5">About</span>
+      </h2>
+
+      <p class="mt-2 text-base leading-7 text-slate-700 lg:line-clamp-4"><%= podcast.description %></p>
+    </section>
+
+    <section class="mt-10 lg:mt-12">
+      <h2 class="sr-only flex items-center font-mono text-sm font-medium leading-7 text-slate-900 lg:not-sr-only">
+        <%= inline_svg_tag "icons/graph.svg", class: "text-indigo-300 h-2.5 w-2.5" %>
+
+        <span class="ml-2.5">Listen</span>
+      </h2>
+
+      <div class="h-px bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0 lg:hidden"></div>
+
+      <ul role="list" class="mt-4 flex justify-center gap-10 text-base font-medium leading-7 text-slate-700 sm:gap-8 lg:flex-col lg:gap-4">
+        <li class="flex">
+          <a class="group flex items-center" aria-label="Spotify" href="/">
+            <%= inline_svg_tag "icons/spotify.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
+            <span class="hidden sm:ml-3 sm:block">Spotify</span>
+          </a>
+        </li>
+        <li class="flex">
+          <a class="group flex items-center" aria-label="Apple Podcast" href="/">
+            <%= inline_svg_tag "icons/apple_podcasts.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
+            <span class="hidden sm:ml-3 sm:block">Apple Podcast</span>
+          </a>
+        </li>
+        <li class="flex">
+          <a class="group flex items-center" aria-label="Overcast" href="/">
+            <%= inline_svg_tag "icons/overcast.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
+            <span class="hidden sm:ml-3 sm:block">Overcast</span>
+          </a>
+        </li>
+        <li class="flex">
+          <a class="group flex items-center" aria-label="RSS Feed" href="/">
+            <%= inline_svg_tag "icons/rss.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
+            <span class="hidden sm:ml-3 sm:block">RSS Feed</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</header>
+
+<main class="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120" aria-labelledby="main_title">
+  <%= inline_svg_tag "waveform.svg", class: "absolute left-0 top-0 h-20 w-full" %>
+
+  <div class="relative">
+    <%= yield %>
+  </div>
+
+  <%= render "episodes/player" do %>
+    <% if partial.player %>
+      <%= partial.yield :player %>
+    <% end %>
+  <% end %>
+</main>
+
+<footer class="border-t border-slate-200 bg-slate-50 py-10 pb-40 sm:py-16 sm:pb-32 lg:hidden">
+  <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4">
+    <section>
+      <h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
+        <%= inline_svg_tag "icons/graph.svg", class: "text-violet-300 h-2.5 w-2.5" %>
+        <span class="ml-2.5">About</span>
+      </h2>
+
+      <p class="mt-2 text-base leading-7 text-slate-700 lg:line-clamp-4"><%= podcast.description %></p>
+
+      <button type="button" class="mt-2 hidden text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900 lg:inline-block">Show more</button>
+    </section>
+
+    <h2 class="mt-8 flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
+      <%= inline_svg_tag "icons/person.svg", class: "h-3 w-auto fill-slate-300" %>
+      <span class="ml-2.5">Hosted by</span>
+    </h2>
+
+    <div class="mt-2 flex gap-6 text-sm font-bold leading-7 text-slate-900">
+      <%= podcast.author %>
+    </div>
+  </div>
+</footer>

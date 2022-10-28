@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/bullet-train-co/nice_partials.git
+  revision: fc66c50c8828bcb374f5f3abd0acb0a43c014085
+  specs:
+    nice_partials (0.10.0)
+      actionview (>= 4.2.6)
+
+GIT
   remote: https://github.com/citizensadvice/capybara_accessible_selectors.git
   revision: 392fec2d49c66f56f53c85c659b60d24e2ae54d3
   branch: main
@@ -191,6 +198,9 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.9.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-console (0.7.2)
     irb (1.13.1)
       rdoc (>= 4.0.0)
@@ -382,7 +392,9 @@ DEPENDENCIES
   good_job
   image_processing (~> 1.2)
   importmap-rails
+  inline_svg
   jbuilder
+  nice_partials!
   pg (~> 1.1)
   propshaft
   puma (~> 6.0)
