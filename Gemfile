@@ -49,6 +49,7 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 gem "devise"
 gem "good_job"
+gem "inline_svg"
 gem "rss", github: "ruby/rss"
 
 group :development, :test do

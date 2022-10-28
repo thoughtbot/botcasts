@@ -1,0 +1,10 @@
+<%
+  sizes = %i[small large]
+  variant = local_assigns[:variant].presence_in(sizes) || sizes.first
+  size = variant.to_s.inquiry
+%>
+
+<%= link_to url_for(autoplay: autoplay ? nil : true), class: class_names("group relative flex flex-shrink-0 items-center justify-center rounded-full bg-slate-700 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 focus:ring focus:ring-offset-4", "h-18 w-18" => size.large?, "h-14 w-14" => size.small?), aria: {label: autoplay ? "Pause" : "Play"} do %>
+  <div class="absolute -inset-3 md:hidden"></div>
+  <%= inline_svg_tag autoplay ? "icons/pause.svg" : "icons/play.svg", class: class_names("fill-white group-active:fill-white/80", "h-7 w-7" => size.large?, "h-5 w-5" => size.small?) %>
+<% end %>

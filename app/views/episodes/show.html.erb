@@ -1,0 +1,45 @@
+<%= render "episodes/podcast/frame", podcast: @episode.podcast do %>
+  <article class="py-16 lg:py-36">
+    <div class="lg:px-8">
+      <div class="lg:max-w-4xl">
+        <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+          <header class="flex flex-col">
+            <div class="flex items-center gap-6">
+              <%= render "play_button", autoplay: params.key?(:autoplay), variant: :large %>
+
+              <div class="flex flex-col">
+                <h1 id="main_title" class="mt-2 text-4xl font-bold text-slate-900">
+                  <%= @episode.title %>
+                </h1>
+
+                <%= time_tag @episode.published_at.to_date, class: "order-first font-mono text-sm leading-7 text-slate-500" %>
+              </div>
+            </div>
+
+            <p class="ml-24 mt-3 text-lg font-medium leading-8 text-slate-700">
+              <%= @episode.subtitle %>
+            </p>
+          </header>
+
+          <div class="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
+            <div class="flex items-center gap-6 bg-white/90 py-4 px-4 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm md:px-6">
+              <div class="hidden">
+                <%= render "play_button", autoplay: params.key?(:autoplay), variant: :small %>
+              </div>
+
+              <div class="mb-[env(safe-area-inset-bottom)] flex flex-1 flex-col gap-3 overflow-hidden p-1">
+                <%= link_to @episode.title, podcast_episode_path(@episode, autoplay: params[:autoplay]), class: "truncate text-center text-sm font-bold leading-6 md:text-left" %>
+
+                <%= audio_tag @episode.audio, class: "w-full", controls: true, autoplay: params[:autoplay] %>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-12 border-gray-200">
+
+          <%= @episode.transcript %>
+        </div>
+      </div>
+    </div>
+  </article>
+<% end %>

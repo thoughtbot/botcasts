@@ -1,0 +1,28 @@
+<article aria-labelledby="<%= dom_id(episode, :title) %>" class="py-10 sm:py-12">
+  <div class="lg:px-8">
+    <div class="lg:max-w-4xl">
+      <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+        <div class="flex flex-col items-start">
+          <h2 id="<%= dom_id(episode, :title) %>" class="mt-2 text-lg font-bold text-slate-900">
+            <%= link_to episode.title, podcast_episode_path(episode.podcast, episode) %>
+          </h2>
+
+          <%= time_tag episode.published_at.to_date, class: "order-first font-mono text-sm leading-7 text-slate-500" %>
+
+          <p class="mt-1 text-base leading-7 text-slate-700"><%= episode.subtitle %></p>
+
+          <div class="mt-4 flex items-center gap-4">
+            <%= link_to podcast_episode_path(episode.podcast, episode, autoplay: true), class: "flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900", aria: {label: "Play episode #{episode.title}"} do %>
+              <%= inline_svg_tag "icons/play.svg", class: "h-2.5 w-2.5 fill-current" %>
+              <span class="ml-3" aria-hidden="true">Listen</span>
+            <% end %>
+
+            <span aria-hidden="true" class="text-sm font-bold text-slate-400">/</span>
+
+            <%= link_to "Show notes", podcast_episode_path(episode.podcast, episode), class: "flex items-center text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900", aria: {label: "Show notes for episode #{episode.title}"} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

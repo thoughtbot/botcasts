@@ -20,3 +20,17 @@ end
 class ActionDispatch::IntegrationTest
   include CapybaraAccessibleSelectors::Session
 end
+
+class FactoryBot::SyntaxRunner
+  def file_fixture(basename)
+    file_fixture_path.join(basename)
+  end
+
+  def file_fixture_path
+    Rails.root.join("test/fixtures/files")
+  end
+end
+
+Capybara.configure do |config|
+  config.enable_aria_label = true
+end
