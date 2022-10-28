@@ -1,0 +1,57 @@
+<%= render "episodes/podcast/frame", podcast: @episode.podcast do %>
+  <article class="py-16 lg:py-36">
+    <div class="lg:px-8">
+      <div class="lg:max-w-4xl">
+        <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+          <header class="flex flex-col">
+            <div class="flex items-center gap-6">
+              <form class="relative flex-shrink-0">
+                <button class="group flex items-center justify-center rounded-full bg-slate-700 h-18 w-18 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 focus:ring focus:ring-offset-4">
+                  <div class="absolute -inset-3 md:hidden"></div>
+
+                  <% with_options class: "h-7 w-7 fill-white group-active:fill-white/80" do |styled| %>
+                    <div class="block group-aria-pressed:hidden">
+                      <span class="sr-only">Play</span>
+                      <%= styled.inline_svg_tag "icons/play.svg" %>
+                    </div>
+
+                    <div class="hidden group-aria-pressed:block">
+                      <span class="sr-only">Pause</span>
+                      <%= styled.inline_svg_tag "icons/pause.svg" %>
+                    </div>
+                  <% end %>
+                </button>
+              </form>
+
+              <div class="flex flex-col">
+                <h1 id="main_title" class="mt-2 text-4xl font-bold text-slate-900">
+                  <%= @episode.title %>
+                </h1>
+
+                <%= time_tag @episode.published_at.to_date, class: "order-first font-mono text-sm leading-7 text-slate-500" %>
+              </div>
+            </div>
+
+            <p class="ml-24 mt-3 text-lg font-medium leading-8 text-slate-700">
+              <%= @episode.subtitle %>
+            </p>
+          </header>
+
+          <hr class="my-12 border-gray-200">
+
+          <%= @episode.transcript %>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div class="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
+    <div class="flex items-center gap-6 bg-white/90 py-4 px-4 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm md:px-6">
+      <div class="mb-[env(safe-area-inset-bottom)] flex flex-1 flex-col gap-3 overflow-hidden p-1">
+        <%= link_to @episode.title, podcast_episode_path(@episode), class: "truncate text-center text-sm font-bold leading-6 md:text-left" %>
+
+        <%= audio_tag @episode.audio, class: "w-full", controls: true %>
+      </div>
+    </div>
+  </div>
+<% end %>

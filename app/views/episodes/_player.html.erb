@@ -1,0 +1,74 @@
+<div class="flex items-center gap-6 bg-white/90 py-4 px-4 shadow shadow-slate-200/80 ring-1 ring-slate-900/5 backdrop-blur-sm md:px-6">
+  <div class="hidden md:block">
+    <button type="button" class="group relative flex flex-shrink-0 items-center justify-center rounded-full bg-slate-700 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 h-14 w-14 focus:ring-2 focus:ring-offset-2" aria-label="Pause">
+      <div class="absolute -inset-3 md:hidden"></div>
+      <%= inline_svg_tag "icons/pause.svg", class: "fill-white group-active:fill-white/80 h-5 w-5" %>
+    </button>
+  </div>
+
+  <div class="mb-[env(safe-area-inset-bottom)] flex flex-1 flex-col gap-3 overflow-hidden p-1">
+    <a class="truncate text-center text-sm font-bold leading-6 md:text-left" title="5: Bill Lumbergh" href="/5">5: Bill Lumbergh</a>
+
+    <div class="flex justify-between gap-6">
+      <div class="flex items-center md:hidden">
+        <button type="button" class="group relative rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 md:order-none" aria-label="Mute">
+          <div class="absolute -inset-4 md:hidden"></div>
+          <%= inline_svg_tag "icons/mute.svg", class: "h-6 w-6 fill-slate-500 stroke-slate-500 group-hover:fill-slate-700 group-hover:stroke-slate-700" %>
+        </button>
+      </div>
+
+      <div class="flex flex-none items-center gap-4">
+        <button type="button" class="group relative rounded-full focus:outline-none" aria-label="Rewind 10 seconds">
+          <div class="absolute -inset-4 -right-2 md:hidden"></div>
+
+          <%= inline_svg_tag "icons/rewind.svg", class: "h-6 w-6 stroke-slate-500 group-hover:stroke-slate-700" %>
+        </button>
+
+        <div class="md:hidden">
+          <button type="button" class="group relative flex flex-shrink-0 items-center justify-center rounded-full bg-slate-700 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 h-10 w-10 focus:ring-2 focus:ring-offset-2" aria-label="Pause">
+            <div class="absolute -inset-3 md:hidden"></div>
+            <%= inline_svg_tag "icons/pause.svg", class: "fill-white group-active:fill-white/80 h-4 w-4" %>
+          </button>
+        </div>
+
+        <button type="button" class="group relative rounded-full focus:outline-none" aria-label="Fast-forward 10 seconds">
+          <div class="absolute -inset-4 -left-2 md:hidden"></div>
+
+          <%= inline_svg_tag "icons/forward.svg", class: "h-6 w-6 stroke-slate-500 group-hover:stroke-slate-700" %>
+      </div>
+
+      <div role="group" id="react-aria3765019461-1" aria-labelledby="react-aria3765019461-2" class="absolute inset-x-0 bottom-full flex flex-auto touch-none items-center gap-6 md:relative">
+        <label class="sr-only" id="react-aria3765019461-2">Current time</label>
+        <div style="position: relative; touch-action: none;" class="relative w-full bg-slate-100 md:rounded-full">
+          <div class="h-2 md:rounded-r-md md:rounded-l-xl bg-slate-700" style="width: calc(14.0625% - 0.25rem);"></div>
+          <div class="absolute top-1/2 -translate-x-1/2" style="left: 14.0625%;">
+            <div style="position: absolute; transform: translate(-50%, -50%); touch-action: none; left: 14.0625%;" class="h-4 rounded-full w-1 bg-slate-700">
+              <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: 0px -1px -1px 0px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap;">
+                <input tabindex="0" id="react-aria3765019461-2-0" aria-labelledby="react-aria3765019461-2" type="range" min="0" max="64" step="1" aria-orientation="horizontal" aria-valuetext="0 hours, 0 minutes, 9 seconds" value="9"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hidden items-center gap-2 md:flex">
+          <output for="react-aria3765019461-2-0" aria-live="off" class="hidden rounded-md px-1 py-0.5 font-mono text-sm leading-6 md:block text-slate-500">00:09</output>
+          <span class="text-sm leading-6 text-slate-300" aria-hidden="true">/</span>
+          <span class="hidden rounded-md px-1 py-0.5 font-mono text-sm leading-6 text-slate-500 md:block">01:04</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="flex items-center">
+          <button type="button" class="relative flex h-6 w-6 items-center justify-center rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2" aria-label="Playback rate">
+            <div class="absolute -inset-4 md:hidden"></div>
+            <%= inline_svg_tag "icons/playback_1.svg", class: "h-4 w-4" %>
+          </button>
+        </div>
+        <div class="hidden items-center md:flex">
+          <button type="button" class="group relative rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 md:order-none" aria-label="Mute">
+            <div class="absolute -inset-4 md:hidden"></div>
+            <%= inline_svg_tag "icons/mute.svg", class: "h-6 w-6 fill-slate-500 stroke-slate-500 group-hover:fill-slate-700 group-hover:stroke-slate-700" %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

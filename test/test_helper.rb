@@ -19,4 +19,34 @@ end
 
 class ActionDispatch::IntegrationTest
   include CapybaraAccessibleSelectors::Session
+
+  def assert_form(buttons: [], **attributes, &block)
+    buttons = buttons.map { Array(_1) }
+
+    assert_selector(:element, "form", **attributes) do |form|
+      if buttons.any?
+        buttons.all? do |button|
+          filters = button.extract_options!
+
+          form.has_button?(*button, **filters)
+        end
+      else
+        form.yield_self(&block)
+      end
+    end
+  end
+end
+
+class FactoryBot::SyntaxRunner
+  def file_fixture(basename)
+    file_fixture_path.join(basename)
+  end
+
+  def file_fixture_path
+    Rails.root.join("test/fixtures/files")
+  end
+end
+
+Capybara.configure do |config|
+  config.enable_aria_label = true
 end

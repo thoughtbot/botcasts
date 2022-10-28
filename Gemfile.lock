@@ -180,6 +180,9 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.8.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-console (0.5.11)
     irb (1.4.2)
       reline (>= 0.3.0)
@@ -208,9 +211,9 @@ GEM
     net-smtp (0.3.2)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.9-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
+      racc (~> 1.4)
+    nokogiri (1.13.9-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.22.1)
@@ -274,9 +277,9 @@ GEM
       rubocop-performance (= 1.14.3)
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
-    tailwindcss-rails (2.0.17-x86_64-darwin)
-      railties (>= 6.0.0)
     tailwindcss-rails (2.0.14-x86_64-linux)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.17-x86_64-darwin)
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.0)
@@ -322,6 +325,7 @@ DEPENDENCIES
   good_job
   image_processing (~> 1.2)
   importmap-rails
+  inline_svg
   jbuilder
   pg (~> 1.1)
   propshaft
