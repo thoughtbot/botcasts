@@ -5,8 +5,13 @@
         <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
           <header class="flex flex-col">
             <div class="flex items-center gap-6">
-              <form class="relative flex-shrink-0">
-                <button class="group flex items-center justify-center rounded-full bg-slate-700 h-18 w-18 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 focus:ring focus:ring-offset-4">
+              <form class="relative flex-shrink-0"
+                    data-action="submit->application#preventDefault:reload"
+                    data-turbo-frame="audio">
+                <button class="group flex items-center justify-center rounded-full bg-slate-700 h-18 w-18 hover:bg-slate-900 focus:outline-none focus:ring-slate-700 focus:ring focus:ring-offset-4"
+                        data-controller="play-button"
+                        data-play-button-player-outlet="#<%= dom_id(@episode, :audio) %>"
+                        data-action="click->play-button#toggle">
                   <div class="absolute -inset-3 md:hidden"></div>
 
                   <% with_options class: "h-7 w-7 fill-white group-active:fill-white/80" do |styled| %>
@@ -49,7 +54,8 @@
     <div class="mb-[env(safe-area-inset-bottom)] flex flex-1 flex-col gap-3 overflow-hidden p-1">
       <%= link_to @episode.title, podcast_episode_path(@episode.podcast, @episode), class: "truncate text-center text-sm font-bold leading-6 md:text-left" %>
 
-      <%= audio_tag @episode.audio, id: dom_id(@episode, :audio), class: "w-full", controls: true %>
+      <%= audio_tag @episode.audio, id: dom_id(@episode, :audio), class: "w-full", controls: true, muted: Rails.env.test?,
+            data: {controller: "player", action: "loadeddata->player#play"} %>
     </div>
   <% end %>
 <% end %>
