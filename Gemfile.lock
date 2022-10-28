@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/bullet-train-co/nice_partials.git
+  revision: 5aee16262643b967c71a1379b4964261ef5bb918
+  specs:
+    nice_partials (0.1.9)
+      actionview (>= 4.2.6)
+
+GIT
   remote: https://github.com/citizensadvice/capybara_accessible_selectors.git
   revision: 392fec2d49c66f56f53c85c659b60d24e2ae54d3
   branch: main
@@ -180,6 +187,9 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.8.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-console (0.5.11)
     irb (1.4.2)
       reline (>= 0.3.0)
@@ -208,9 +218,9 @@ GEM
     net-smtp (0.3.2)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.8-x86_64-linux)
+    nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-darwin)
+    nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.22.1)
@@ -322,7 +332,9 @@ DEPENDENCIES
   good_job
   image_processing (~> 1.2)
   importmap-rails
+  inline_svg
   jbuilder
+  nice_partials!
   pg (~> 1.1)
   propshaft
   puma (~> 5.0)

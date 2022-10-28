@@ -49,7 +49,9 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 gem "devise"
 gem "good_job"
+gem "inline_svg"
 gem "rss", github: "ruby/rss"
+gem "nice_partials", github: "bullet-train-co/nice_partials"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
