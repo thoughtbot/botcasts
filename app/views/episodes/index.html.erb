@@ -9,7 +9,43 @@
     </div>
 
     <div class="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-      <%= render @episodes %>
+      <div>
+        <% if @page.prev %>
+          <div class="py-10 sm:py-12">
+            <div class="lg:px-8">
+              <div class="lg:max-w-4xl">
+                <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+                  <%= link_to pagy_url_for(@page, @page.prev), rel: "prev",
+                    class: "flex animate-bounce items-center justify-center rounded-full bg-white p-2 shadow-lg text-pink-500 ring-1 ring-slate-900/5 focus:ring hover:text-pink-700 active:text-pink-900" do %>
+                    <span class="sr-only">Load newer episodes</span>
+                    <%= inline_svg_tag "icons/up_arrow.svg", class: "h-6 w-6" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <%= render @episodes %>
+
+        <% if @page.next %>
+          <div>
+            <div class="py-10 sm:py-12">
+              <div class="lg:px-8">
+                <div class="lg:max-w-4xl">
+                  <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+                    <%= link_to pagy_url_for(@page, @page.next), rel: "next",
+                      class: "flex animate-bounce items-center justify-center rounded-full bg-white p-2 shadow-lg text-pink-500 ring-1 ring-slate-900/5 focus:ring hover:text-pink-700 active:text-pink-900" do %>
+                      <span class="sr-only">Load older episodes</span>
+                      <%= inline_svg_tag "icons/down_arrow.svg", class: "h-6 w-6" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
