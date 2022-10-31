@@ -1,24 +1,17 @@
-# README
+# 🤖 Botcasts
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hotwire-powered Podcast Player 🔌
 
-Things you may want to cover:
+## ⚙️  Setup
 
-* Ruby version
+If this is your first time running the application, run `./bin/setup` to
+install dependencies and seed the database.
 
-* System dependencies
+## Getting Started
 
-* Configuration
+[Get started](./lessons/README.md)
 
-* Database creation
+## 🏗 Local Development
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run `./bin/dev` to start the development server and then navigate to
+[http://localhost:3000](http://localhost:3000)
