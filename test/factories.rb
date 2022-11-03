@@ -27,7 +27,7 @@ FactoryBot.define do
     copyright { "© 2022 Giant Robots Smashing Into Other Giant Robots" }
     description { "a podcast by thoughtbot" }
     episode_type { "episodic" }
-    keywords { ["design", "development", "product" ] }
+    keywords { ["design", "development", "product"] }
     language { "en-us" }
     published_at { 1.day.ago }
     subtitle { "it's a good listen" }
