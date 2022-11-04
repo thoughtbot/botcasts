@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2022_10_23_220840) do
+ActiveRecord::Schema[7.1].define(version: 2022_12_05_043800) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.1].define(version: 2022_10_23_220840) do
     t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "body_plain_text"
+    t.index "to_tsvector('english'::regconfig, body_plain_text)", name: "body_tsvector_idx", using: :gin
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -67,6 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2022_10_23_220840) do
     t.datetime "updated_at", null: false
     t.index ["podcast_id", "guid"], name: "index_episodes_on_podcast_id_and_guid", unique: true
     t.index ["podcast_id"], name: "index_episodes_on_podcast_id"
+    t.index ["subtitle"], name: "index_episodes_on_subtitle", where: "(NOT NULL::boolean)"
+    t.index ["title"], name: "index_episodes_on_title"
   end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
