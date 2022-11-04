@@ -23,6 +23,8 @@ FactoryBot.define do
   end
 
   factory :podcast do
+    sequence(:title) { "botcast #{_1}" }
+
     author { "thoughtbot" }
     copyright { "© 2022 Giant Robots Smashing Into Other Giant Robots" }
     description { "a podcast by thoughtbot" }
@@ -31,7 +33,6 @@ FactoryBot.define do
     language { "en-us" }
     published_at { 1.day.ago }
     subtitle { "it's a good listen" }
-    title { "botcast" }
 
     transient do
       image { file_fixture("image.jpg") }

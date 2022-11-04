@@ -23,6 +23,9 @@ jobs:
           ruby-version: 3.1.2
           bundler-cache: true
 
+      - name: Install libvips
+        run: sudo apt-get install -y libvips
+
       - name: Build and run tests
         env:
           PGHOST: localhost
