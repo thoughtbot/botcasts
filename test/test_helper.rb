@@ -14,6 +14,16 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    def with_pagy_defaults(**overrides)
+      defaults = Pagy::DEFAULT.dup
+
+      Pagy::DEFAULT.merge!(overrides)
+
+      yield
+    ensure
+      Pagy::DEFAULT.merge!(defaults)
+    end
   end
 end
 

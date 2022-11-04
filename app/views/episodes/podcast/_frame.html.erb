@@ -14,6 +14,19 @@
       <p class="mt-3 text-lg font-medium leading-8 text-slate-700"><%= podcast.subtitle %></p>
     </div>
 
+    <section class="mt-10 lg:mt-12">
+      <div class="border border-gray-300 bg-white rounded-md shadow-sm text-slate-500">
+        <%= link_to podcast_search_results_path(podcast), class: "flex gap-5" do %>
+          <div class="flex items-center pl-3">
+            <%= inline_svg_tag "icons/search.svg", class: "h-2.5 w-2.5" %>
+          </div>
+          <div class="w-full rounded-md py-1">
+            <span class="font-mono text-sm leading-7">Search</span>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
     <section class="mt-12 hidden lg:block">
       <h2 class="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
         <%= inline_svg_tag "icons/graph.svg", class: "h-2.5 w-2.5" %>
