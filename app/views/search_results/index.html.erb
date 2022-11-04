@@ -1,0 +1,95 @@
+<%= render "episodes/podcast/frame", podcast: @podcast do %>
+  <div>
+    <div class="pt-16 pb-12 sm:pb-4 lg:pt-12">
+      <div class="lg:px-8">
+        <div class="lg:max-w-4xl">
+          <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+            <h1 id="main_title" class="text-2xl font-bold leading-7 text-slate-900">
+              <% if @search.query.present? %>
+                Search Results for "<%= @search.query %>"
+              <% else %>
+                Search
+              <% end %>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-16 pb-12 sm:pb-4 lg:pt-12">
+      <div class="lg:px-8">
+        <div class="lg:max-w-4xl">
+          <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+            <%= form_with model: @search, scope: "", url: false, method: :get, class: "flex items-center gap-4" do |form| %>
+              <div class="relative mt-1 rounded-md shadow-sm">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <%= inline_svg_tag "icons/search.svg", class: "h-2.5 w-2.5" %>
+                </div>
+                <%= form.label :query, class: "sr-only" %>
+                <%= form.text_field :query, class: "w-full rounded-md border-gray-300 pl-10 text-sm placeholder:font-mono placeholder:text-sm placeholder:leading-7 placeholder:text-slate-500",
+                                    placeholder: "Search", autofocus: true,
+                                    aria: {describedby: dom_id(@search, :prompt)} %>
+              </div>
+
+              <button class="text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900">
+                Search
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:px-8">
+      <div class="lg:max-w-4xl">
+        <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+          <p id="<%= dom_id(@search, :prompt) %>" class="font-mono text-sm font-medium leading-7 text-slate-900">
+            Search for episodes by their title, subtitle, or transcript.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="search_results_list" class="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
+      <div>
+        <% if @page.prev %>
+          <div class="py-10 sm:py-12">
+            <div class="lg:px-8">
+              <div class="lg:max-w-4xl">
+                <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+                  <%= link_to pagy_url_for(@page, @page.prev), rel: "prev",
+                    class: "flex animate-bounce items-center justify-center rounded-full bg-white p-2 shadow-lg text-pink-500 ring-1 ring-slate-900/5 focus:ring hover:text-pink-700 active:text-pink-900" do %>
+                    <span class="sr-only">Load newer episodes</span>
+                    <%= inline_svg_tag "icons/up_arrow.svg", class: "h-6 w-6" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @search.query.present? %>
+          <%= render(@search_results) || render("searches/search/empty", search: @search) %>
+        <% end %>
+
+        <% if @page.next %>
+          <div>
+            <div class="py-10 sm:py-12">
+              <div class="lg:px-8">
+                <div class="lg:max-w-4xl">
+                  <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+                    <%= link_to pagy_url_for(@page, @page.next), rel: "next",
+                      class: "flex animate-bounce items-center justify-center rounded-full bg-white p-2 shadow-lg text-pink-500 ring-1 ring-slate-900/5 focus:ring hover:text-pink-700 active:text-pink-900" do %>
+                      <span class="sr-only">Load older episodes</span>
+                      <%= inline_svg_tag "icons/down_arrow.svg", class: "h-6 w-6" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

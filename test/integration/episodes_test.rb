@@ -48,6 +48,16 @@ module Episodes
         assert_selector :element, id: "audio"
       end
     end
+
+    test "provides navigation to the Search page" do
+      episode = create(:episode)
+
+      get podcast_episodes_path(episode.podcast)
+
+      within :banner do
+        assert_link "Search", href: podcast_search_results_path(episode.podcast)
+      end
+    end
   end
 
   class ShowTest < ActionDispatch::IntegrationTest
