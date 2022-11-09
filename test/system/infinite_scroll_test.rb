@@ -1,28 +1,12 @@
 require "application_system_test_case"
 
-class SearchResultsTest < ApplicationSystemTestCase
-  test "searching episodes" do
-    episode = create(:episode, title: "Episode Title")
-
-    visit podcast_episodes_path(episode.podcast)
-    click_on "Search"
-    within :main, "Search" do
-      fill_in "Query", with: "title", focused: true
-      click_on "Search"
-    end
-
-    within :main, "Search Results" do
-      assert_selector :article, episode.title, count: 1
-    end
-  end
-
+class InfiniteScrollTest < ApplicationSystemTestCase
   test "scrolling loads the next page of episodes" do
     with_pagy_defaults items: 10 do
-      query = "A match"
       podcast = create(:podcast)
-      top_episode, bottom_episode, * = 11.times.map { create(:episode, podcast:, title: "##{_1}: #{query}") }
+      top_episode, bottom_episode, * = create_list(:episode, 11, podcast:)
 
-      visit podcast_search_results_path(podcast, query:)
+      visit podcast_episodes_path(podcast)
 
       within :main do
         assert_no_selector :article, top_episode.title
@@ -32,17 +16,17 @@ class SearchResultsTest < ApplicationSystemTestCase
 
         assert_no_link "Load older episodes"
         assert_selector :article, top_episode.title
+        assert_equal podcast_episodes_url(podcast, page: 2), current_url
       end
     end
   end
 
   test "load the previous page of episodes from the link" do
     with_pagy_defaults items: 10 do
-      query = "A match"
       podcast = create(:podcast)
-      top_episode, bottom_episode, * = 11.times.map { create(:episode, podcast:, title: "##{_1}: #{query}") }
+      top_episode, bottom_episode, * = create_list(:episode, 11, podcast:)
 
-      visit podcast_search_results_path(podcast, query:, page: 2)
+      visit podcast_episodes_path(podcast, page: 2)
 
       within :main do
         assert_link "Load newer episodes"
@@ -53,6 +37,7 @@ class SearchResultsTest < ApplicationSystemTestCase
 
         assert_selector :article, bottom_episode.title
         assert_no_selector :article, top_episode.title
+        assert_equal podcast_episodes_url(podcast, page: 1), current_url
       end
     end
   end

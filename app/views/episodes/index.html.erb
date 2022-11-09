@@ -8,10 +8,11 @@
       </div>
     </div>
 
-    <div class="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
-      <div>
+    <div class="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100"
+         data-controller="pagination" data-action="turbo:frame-load->pagination#loadPage">
+      <%= turbo_frame_tag "page_#{@page.page}", target: "_top" do %>
         <% if @page.prev %>
-          <div class="py-10 sm:py-12">
+          <div class="py-10 sm:py-12 hidden first:block">
             <div class="lg:px-8">
               <div class="lg:max-w-4xl">
                 <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
@@ -29,8 +30,10 @@
         <%= render @episodes %>
 
         <% if @page.next %>
-          <div>
-            <div class="py-10 sm:py-12">
+          <%= turbo_frame_tag "page_#{@page.next}",
+                src: pagy_url_for(@page, @page.next), loading: :lazy,
+                data: { turbo_action: :replace } do %>
+            <div class="py-10 sm:py-12 hidden last:block">
               <div class="lg:px-8">
                 <div class="lg:max-w-4xl">
                   <div class="flex justify-center mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
@@ -43,9 +46,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 <% end %>
