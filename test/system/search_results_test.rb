@@ -11,7 +11,6 @@ class SearchResultsTest < ApplicationSystemTestCase
     within :main, "Search" do
       tab_until_focused(:field, "Query")
       fill_in "Query", with: "episode"
-      send_keys :enter
     end
 
     within :main, %(Search Results for "episode") do
@@ -19,13 +18,37 @@ class SearchResultsTest < ApplicationSystemTestCase
       assert_selector :article, "Episode Two", count: 1
     end
 
-    fill_in "Query", with: "episode two"
-    send_keys :enter
+    send_keys " two"
 
     within :main, %(Search Results for "episode two") do
       assert_selector :article, "Episode Two", count: 1
       assert_no_selector :article, "Episode One"
     end
+  end
+
+  test "does not add history entries for each keystroke" do
+    podcast = create(:podcast)
+
+    visit podcast_episodes_path(podcast)
+    click_on "Search"
+    within :main, "Search" do
+      fill_in "Query", with: "first query"
+    end
+    within :main, %(Search Results for "first query") do
+      fill_in "Query", with: "second query"
+    end
+    within :main, %(Search Results for "second query") do
+      fill_in "Query", with: "third query"
+    end
+    within :main, %(Search Results for "third query") do
+      go_back
+    end
+
+    within :main, "Episodes" do
+      go_forward
+    end
+
+    assert_selector :main, %(Search Results for "third query")
   end
 
   test "scrolling loads the next page of episodes" do
