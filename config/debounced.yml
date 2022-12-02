@@ -1,0 +1,7 @@
+shared:
+  input:
+    wait: 100
+
+test:
+  input:
+    wait: 0

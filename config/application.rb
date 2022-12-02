@@ -20,5 +20,6 @@ module Botcasts
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_job.queue_adapter = :good_job
+    config.debounced = config_for(:debounced)
   end
 end
