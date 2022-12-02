@@ -31,6 +31,26 @@ module SearchResults
       end
     end
 
+    test "renders form to live-submit when input" do
+      podcast = create(:podcast)
+
+      get podcast_search_results_path(podcast)
+
+      within :main, "Search" do
+        assert_selector :element, "form", method: "get", action: false,
+          "data-controller": "element",
+          "data-action": "debounced:input->element#requestSubmit"
+      end
+    end
+
+    test "renders form to replace history as it submits" do
+      podcast = create(:podcast)
+
+      get podcast_search_results_path(podcast)
+
+      assert_selector :element, "form", method: "get", action: false, "data-turbo-action": "replace"
+    end
+
     test "renders a list of the Podcast's Episodes that match the query" do
       podcast = create(:podcast)
       included = create(:episode, podcast:, title: "A title match", subtitle: "A subtitle match", transcript: "A matching transcript")
