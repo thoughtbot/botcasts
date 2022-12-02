@@ -9,6 +9,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_tag type: "module", nonce: true do %>
+      import debounced from "debounced"
+
+      debounced.initialize(<%= raw Rails.configuration.debounced.to_json %>)
+    <% end %>
   </head>
 
   <body data-controller="hotkey">
