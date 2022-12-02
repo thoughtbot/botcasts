@@ -4,4 +4,8 @@ export default class extends ApplicationController {
   replaceWithChildren() {
     this.element.replaceWith(...this.element.children)
   }
+
+  requestSubmit() {
+    this.element.requestSubmit()
+  }
 }
