@@ -20,7 +20,12 @@
       <div class="lg:px-8">
         <div class="lg:max-w-4xl">
           <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
-            <%= form_with model: @search, scope: "", url: false, method: :get, class: "flex items-center gap-4" do |form| %>
+            <%= form_with model: @search, scope: "", url: false, method: :get, class: "flex items-center gap-4",
+                  data: {
+                    turbo_action: "replace",
+                    controller: "element",
+                    action: "debounced:input->element#requestSubmit",
+                  } do |form| %>
               <div class="relative mt-1 rounded-md shadow-sm">
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <%= inline_svg_tag "icons/search.svg", class: "h-2.5 w-2.5" %>
@@ -28,7 +33,8 @@
                 <%= form.label :query, class: "sr-only" %>
                 <%= form.text_field :query, class: "w-full rounded-md border-gray-300 pl-10 text-sm placeholder:font-mono placeholder:text-sm placeholder:leading-7 placeholder:text-slate-500",
                                     placeholder: "Search", autofocus: true,
-                                    aria: {describedby: dom_id(@search, :prompt)} %>
+                                    aria: {describedby: dom_id(@search, :prompt)},
+                                    data: {turbo_permanent: true} %>
               </div>
 
               <button class="text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900">
