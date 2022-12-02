@@ -8,7 +8,7 @@ module SearchResults
       get podcast_search_results_path(podcast)
 
       within :main, "Search" do
-        within :element, "form", method: "get", action: false do
+        within :element, "form", method: "get", action: podcast_search_results_path(podcast) do
           assert_field "Query", type: "text", described_by: "Search for episodes by their title, subtitle, or transcript."
           assert_button "Search"
         end
@@ -22,7 +22,7 @@ module SearchResults
       get podcast_search_results_path(podcast), params: {query:}
 
       within :main, %(Search Results for "#{query}") do
-        within :element, "form", method: "get", action: false do
+        within :element, "form", method: "get", action: podcast_search_results_path(podcast) do
           assert_field "Query", type: "text", with: query
           assert_button "Search"
         end
@@ -37,7 +37,7 @@ module SearchResults
       get podcast_search_results_path(podcast)
 
       within :main, "Search" do
-        assert_selector :element, "form", method: "get", action: false,
+        assert_selector :element, "form", method: "get", action: podcast_search_results_path(podcast),
           "data-controller": "element",
           "data-action": "debounced:input->element#requestSubmit"
       end
@@ -48,7 +48,25 @@ module SearchResults
 
       get podcast_search_results_path(podcast)
 
-      assert_selector :element, "form", method: "get", action: false, "data-turbo-action": "replace"
+      within :element, "turbo-frame", id: "frame_search", target: "_top" do
+        assert_selector :element, "form", method: "get", action: podcast_search_results_path(podcast),
+          "data-turbo-action": "replace" do |form|
+          form.has_no_selector?(:field, type: "hidden", name: "turbo_frame")
+        end
+      end
+    end
+
+    test "renders form without [data-turbo-action] when rendered into a turbo-frame" do
+      podcast = create(:podcast)
+
+      get podcast_search_results_path(podcast), params: {turbo_frame: "a-frame"}
+
+      within :element, "turbo-frame", id: "a-frame", target: "_top" do
+        assert_selector :element, "form", method: "get", action: podcast_search_results_path(podcast),
+          "data-turbo-action": false do |form|
+          form.has_selector?(:field, type: "hidden", name: "turbo_frame", with: "a-frame")
+        end
+      end
     end
 
     test "renders a list of the Podcast's Episodes that match the query" do

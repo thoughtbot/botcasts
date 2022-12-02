@@ -1,5 +1,5 @@
-<%= render "episodes/podcast/frame", podcast: @podcast do %>
-  <div>
+<% if @search.turbo_frame.nil? %>
+  <%= render "episodes/podcast/frame", podcast: @podcast do %>
     <div class="pt-16 pb-12 sm:pb-4 lg:pt-12">
       <div class="lg:px-8">
         <div class="lg:max-w-4xl">
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div id="search_results_list" class="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
+    <div class="divide-y divide-slate-100 overflow-y-auto sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
       <turbo-frame id="page_<%= @page.page %>" target="_top">
         <% if @page.prev %>
           <div class="py-10 sm:py-12 hidden first:block">
@@ -98,5 +98,54 @@
         <% end %>
       </turbo-frame>
     </div>
-  </div>
+  <% end %>
+<% else %>
+  <turbo-frame id="search_results_dialog">
+    <div class="flex items-center px-4 border-b border-gray-100">
+      <%= form_with model: @search, scope: "", method: :get, namespace: "search_results_dialog",
+            class: "flex-1 flex items-center gap-2",
+            data: {
+              controller: "element",
+              action: "debounced:input->element#requestSubmit",
+            } do |form| %>
+        <%= form.hidden_field :turbo_frame %>
+
+        <%= inline_svg_tag "icons/search.svg", class: "pointer-events-none h-5 w-5 text-gray-400" %>
+        <%= form.label :query, class: "sr-only" %>
+        <%= form.text_field :query, class: "h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm underline aria-[activedescendant]:no-underline",
+              placeholder: "Search", autofocus: true,
+              aria: {describedby: dom_id(@search, :prompt)},
+              data: {turbo_permanent: true, combobox_nav_target: "combobox"} %>
+      <% end %>
+
+      <form>
+        <button class="inline-flex items-center font-mono text-xs rounded-md border border-gray-300 p-1 outline-none focus:ring" formmethod="dialog">
+          <kbd><abbr title="Escape" class="no-underline">esc</abbr></kbd>
+        </button>
+      </form>
+    </div>
+
+    <div class="max-h-96 overflow-y-auto text-sm divide-y divide-slate-100 text-gray-800 empty:hidden" id="search_results_listbox" data-combobox-nav-target="listbox">
+      <% if @search_results.any? %>
+        <%= render(@search_results) %>
+
+        <% if @page.next %>
+          <%= button_to url_for(@search), method: "get", params: {**@search},
+                id: "search_results_page", tabindex: "-1", role: "option",
+                class: "w-full hover:bg-slate-100 aria-selected:bg-slate-100",
+                data: {turbo_frame: "_top"} do %>
+            <p class="font-medium px-4 py-2">
+              View all results for "<%= @search.query %>"
+            </p>
+          <% end %>
+        <% end %>
+      <% else %>
+        <button id="empty_search_results" type="button" tabindex="-1" role="option"
+                class="p-4 text-sm text-gray-500"
+                aria-disabled="true">
+          No episodes found.
+        </button>
+      <% end %>
+    </div>
+  </turbo-frame>
 <% end %>

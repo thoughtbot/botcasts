@@ -16,8 +16,7 @@
 
     <section class="mt-10 lg:mt-12">
       <div class="border border-gray-300 bg-white rounded-md shadow-sm text-slate-500 focus-within:ring">
-        <%= link_to podcast_search_results_path(podcast), class: "outline-none",
-              data: {hotkey_target: "shortcut", hotkey: "Meta+k"} do %>
+        <% search = capture do %>
           <div class="flex items-center gap-5 px-3 text-start">
             <%= inline_svg_tag "icons/search.svg", class: "h-2.5 w-2.5" %>
 
@@ -30,6 +29,13 @@
             </kbd>
           </div>
         <% end %>
+
+        <%= link_to search, podcast_search_results_path(podcast), class: "lg:hidden outline-none",
+              data: {hotkey_target: "shortcut", hotkey: "Meta+k"} %>
+        <%= tag.button search, type: "button", class: "hidden lg:block w-full outline-none",
+              data: {controller: "disclosure", action: "click->disclosure#expand",
+                     hotkey_target: "shortcut", hotkey: "Meta+k",
+                     disclosure_element_outlet: "#dialog"} %>
       </div>
     </section>
 
@@ -118,3 +124,11 @@
     </div>
   </div>
 </footer>
+
+<dialog id="dialog" class="w-full max-w-xl rounded-md border border-slate-300 p-0" aria-label="Search"
+        data-controller="element">
+  <turbo-frame id="search_results_dialog" loading="lazy"
+               src="<%= podcast_search_results_path(podcast, turbo_frame: "search_results_dialog") %>"
+               data-controller="combobox-nav">
+  </turbo-frame>
+</dialog>

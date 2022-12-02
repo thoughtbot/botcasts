@@ -9,6 +9,6 @@ class SearchResultsController < ApplicationController
   private
 
   def search_params
-    params.permit!.slice(:page, :query)
+    params.permit!.slice(:page, :query, :turbo_frame)
   end
 end

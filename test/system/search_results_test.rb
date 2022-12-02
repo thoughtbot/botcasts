@@ -6,9 +6,7 @@ class SearchResultsTest < ApplicationSystemTestCase
     create(:episode, podcast:, title: "Episode One")
     create(:episode, podcast:, title: "Episode Two")
 
-    visit podcast_episodes_path(podcast)
-    tab_until_focused(:link, "Episode One")
-    send_keys [:meta, "k"]
+    visit podcast_search_results_path(podcast)
     within :main, "Search" do
       fill_in "Query", with: "episode"
     end
@@ -29,8 +27,7 @@ class SearchResultsTest < ApplicationSystemTestCase
   test "does not add history entries for each keystroke" do
     podcast = create(:podcast)
 
-    visit podcast_episodes_path(podcast)
-    click_on "Search"
+    visit podcast_search_results_path(podcast)
     within :main, "Search" do
       fill_in "Query", with: "first query"
     end
@@ -43,10 +40,7 @@ class SearchResultsTest < ApplicationSystemTestCase
     within :main, %(Search Results for "third query") do
       go_back
     end
-
-    within :main, "Episodes" do
-      go_forward
-    end
+    go_forward
 
     assert_selector :main, %(Search Results for "third query")
   end
@@ -58,7 +52,6 @@ class SearchResultsTest < ApplicationSystemTestCase
       top_episode, bottom_episode, * = 11.times.map { create(:episode, podcast:, title: "##{_1}: #{query}") }
 
       visit podcast_search_results_path(podcast, query:)
-
       within :main do
         assert_no_selector :article, top_episode.title
         assert_link "Load older episodes"
@@ -89,6 +82,25 @@ class SearchResultsTest < ApplicationSystemTestCase
         assert_selector :article, bottom_episode.title
         assert_no_selector :article, top_episode.title
       end
+    end
+  end
+
+  test "searching episodes from an action panel" do
+    podcast = create(:podcast)
+    create(:episode, podcast:, title: "Episode One")
+    create(:episode, podcast:, title: "Episode Two")
+
+    visit podcast_episodes_path(podcast)
+    tab_until_focused(:link, "Episode One")
+    send_keys [:meta, "k"]
+    within_modal "Search" do
+      fill_in "Query", with: "episode"
+
+      assert_selector :combo_box, expanded: true, options: ["Episode Two", "Episode One"]
+
+      send_keys " two"
+
+      assert_selector :combo_box, expanded: true, options: ["Episode Two"]
     end
   end
 end

@@ -1,0 +1,18 @@
+<%= button_to podcast_episode_path(search_result.podcast, search_result.episode), method: "get",
+      id: dom_id(search_result), tabindex: "-1", role: "option",
+      class: "w-full hover:bg-slate-100 aria-selected:bg-slate-100",
+      aria: {labelledby: dom_id(search_result, :title)},
+      data: {turbo_frame: "_top"} do %>
+  <div class="flex flex-col items-start gap-1 select-none text-start px-4 py-2">
+    <span id="<%= dom_id(search_result, :title) %>" class="font-medium">
+      <%= highlight search_result.title, search_result.query %>
+    </span>
+
+    <p>
+      <%= highlight(
+        excerpt(search_result.transcript.to_plain_text, search_result.query, radius: 35),
+        search_result.query
+      ) %>
+    </p>
+  </div>
+<% end %>

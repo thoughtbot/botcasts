@@ -4,6 +4,7 @@ class Search < ApplicationModel
   attribute :podcast
   attribute :page
   attribute :query, :string
+  attribute :turbo_frame, :string
 
   def search_results
     page, paginated_episodes = pagy episodes
@@ -17,6 +18,10 @@ class Search < ApplicationModel
     else
       podcast.episodes.none
     end
+  end
+
+  def to_hash
+    {query:, **params}.compact_blank
   end
 
   private

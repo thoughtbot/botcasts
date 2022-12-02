@@ -8,4 +8,8 @@ export default class extends ApplicationController {
   requestSubmit() {
     this.element.requestSubmit()
   }
+
+  showModal() {
+    this.element.showModal()
+  }
 }
