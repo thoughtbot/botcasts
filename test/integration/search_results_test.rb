@@ -68,6 +68,43 @@ module SearchResults
       end
     end
 
+    test "links to the next page" do
+      with_pagy_defaults items: 1 do
+        title = "Episode"
+        podcast = create(:podcast)
+        create_list(:episode, 2, podcast:, title:)
+
+        get podcast_search_results_path(podcast), params: {query: title}
+
+        within :element, id: "search_results_list" do
+          within :element, "turbo-frame", id: "page_1", target: "_top" do
+            within :element, "turbo-frame", id: "page_2", loading: "lazy",
+              "data-turbo-action": "replace",
+              "data-controller": "element",
+              "data-action": "turbo:frame-load->element#replaceWithChildren" do
+              assert_link("Load older episodes") { _1[:rel] == "next" }
+            end
+          end
+        end
+      end
+    end
+
+    test "links to the previous page" do
+      with_pagy_defaults items: 1 do
+        title = "Episode"
+        podcast = create(:podcast)
+        create_list(:episode, 2, podcast:, title:)
+
+        get podcast_search_results_path(podcast), params: {query: title, page: 2}
+
+        within :element, id: "search_results_list" do
+          within :element, "turbo-frame", id: "page_2", target: "_top" do
+            assert_link("Load newer episodes") { _1[:rel] == "prev" }
+          end
+        end
+      end
+    end
+
     test "renders an empty placeholder for the player" do
       podcast = create(:podcast)
 
