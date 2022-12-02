@@ -52,6 +52,41 @@ module Episodes
       end
     end
 
+    test "links to the next page" do
+      with_pagy_defaults items: 1 do
+        podcast = create(:podcast)
+        create_list(:episode, 2, podcast:)
+
+        get podcast_episodes_path(podcast)
+
+        within :element, "turbo-frame", id: "page_1", target: "_top" do
+          within :element, "turbo-frame", id: "page_2", loading: "lazy", src: podcast_episodes_path(podcast, page: 2),
+            "data-turbo-action": "replace",
+            "data-controller": "element",
+            "data-action": "turbo:frame-load->element#replaceWithChildren" do
+            assert_link("Load older episodes", href: podcast_episodes_path(podcast, page: 2)) do |link|
+              link[:rel] == "next"
+            end
+          end
+        end
+      end
+    end
+
+    test "links to the previous page" do
+      with_pagy_defaults items: 1 do
+        podcast = create(:podcast)
+        create_list(:episode, 2, podcast:)
+
+        get podcast_episodes_path(podcast), params: {page: 2}
+
+        within :element, "turbo-frame", id: "page_2", target: "_top" do
+          assert_link("Load newer episodes", href: podcast_episodes_path(podcast, page: 1)) do |link|
+            link[:rel] == "prev"
+          end
+        end
+      end
+    end
+
     test "provides navigation to the Search page" do
       episode = create(:episode)
 
