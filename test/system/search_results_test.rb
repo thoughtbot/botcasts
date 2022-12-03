@@ -7,9 +7,9 @@ class SearchResultsTest < ApplicationSystemTestCase
     create(:episode, podcast:, title: "Episode Two")
 
     visit podcast_episodes_path(podcast)
-    click_on "Search"
+    tab_until_focused(:link, "Episode One")
+    send_keys [:meta, "k"]
     within :main, "Search" do
-      tab_until_focused(:field, "Query")
       fill_in "Query", with: "episode"
       send_keys :enter
     end
