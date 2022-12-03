@@ -16,13 +16,19 @@
 
     <section class="mt-10 lg:mt-12">
       <div class="border border-gray-300 bg-white rounded-md shadow-sm text-slate-500 focus-within:ring">
-        <%= link_to podcast_search_results_path(podcast), class: "outline-none" do %>
+        <%= link_to podcast_search_results_path(podcast), class: "outline-none",
+              aria: {keyshortcuts: "Meta+k"},
+              data: {hotkey_target: "shortcut"} do %>
           <div class="flex items-center gap-5 px-3 text-start">
             <%= inline_svg_tag "icons/search.svg", class: "h-2.5 w-2.5" %>
 
             <div class="flex-1 py-1">
               <span class="font-mono text-sm leading-7">Search</span>
             </div>
+
+            <kbd class="inline-flex items-center gap-1 font-mono text-sm leading-7">
+              <abbr title="Command" class="no-underline text-slate-300">⌘</abbr> K
+            </kbd>
           </div>
         <% end %>
       </div>
