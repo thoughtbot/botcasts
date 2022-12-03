@@ -54,8 +54,14 @@ module Episodes
 
       get podcast_episodes_path(episode.podcast)
 
-      within :banner do
-        assert_link "Search", href: podcast_search_results_path(episode.podcast)
+      within :element, "data-controller": /hotkey/ do
+        within :banner do
+          within :element, "a", text: "Search", href: podcast_search_results_path(episode.podcast),
+            "aria-keyshortcuts": "Meta+k",
+            "data-hotkey-target": "shortcut" do
+            assert_selector :element, "kbd", text: "⌘ K"
+          end
+        end
       end
     end
   end

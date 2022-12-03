@@ -8,3 +8,9 @@ To get started, make sure you've run `./bin/setup`. Then run `./ta/start-lesson
 1` to start the first lesson.  Refer to the table of contents below to help
 guide you through each lesson.
 
+To list all lessons, run `./ta/list-lessons`. You can jump between lessons at
+anytime.
+
+# Table of Contents
+
+* [Lesson 1: Our first lines of JavaScript](./lesson-1.md)
