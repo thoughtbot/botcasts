@@ -14,3 +14,4 @@
 # Table of Contents
 
 * [Getting Started](./lesson-0.md)
+* [Lesson 1: Our first lines of JavaScript](./lesson-1.md)
