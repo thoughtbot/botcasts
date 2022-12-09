@@ -11,3 +11,6 @@
 ```sh
 ./ta/list-lessons
 ```
+# Table of Contents
+
+* [Getting Started](./lesson-0.md)
