@@ -49,7 +49,7 @@ class SearchResultsTest < ApplicationSystemTestCase
     with_pagy_defaults items: 10 do
       query = "A match"
       podcast = create(:podcast)
-      top_episode, bottom_episode, * = 11.times.map { create(:episode, podcast:, title: "##{_1}: #{query}") }
+      top_episode, bottom_episode, * = 11.times.map { create(:episode, podcast:, title: "Episode ##{_1}: #{query}") }
 
       visit podcast_search_results_path(podcast, query:)
       within :main do
@@ -85,7 +85,7 @@ class SearchResultsTest < ApplicationSystemTestCase
     end
   end
 
-  test "searching episodes from an action panel" do
+  test "searching episodes from the action panel supports typeahead" do
     podcast = create(:podcast)
     create(:episode, podcast:, title: "Episode One")
     create(:episode, podcast:, title: "Episode Two")
@@ -101,6 +101,25 @@ class SearchResultsTest < ApplicationSystemTestCase
       send_keys " two"
 
       assert_selector :combo_box, expanded: true, options: ["Episode Two"]
+    end
+  end
+
+  test "searching episodes from the action panel includes an option to view the full set of results" do
+    podcast = create(:podcast)
+    create(:episode, podcast:, title: "Episode One")
+    create(:episode, podcast:, title: "Episode Two")
+
+    with_pagy_defaults items: 1 do
+      visit podcast_episodes_path(podcast)
+      toggle_disclosure "Search"
+      within_modal "Search" do
+        select_combo_box_option %(View all results for "episode"), from: "Query", search: "episode"
+      end
+
+      within :main, %(Search Results for "episode") do
+        assert_selector :article, "Episode Two", count: 1
+        assert_selector :article, "Episode One", count: 1
+      end
     end
   end
 end

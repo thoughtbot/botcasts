@@ -125,10 +125,29 @@
   </div>
 </footer>
 
-<dialog id="dialog" class="w-full max-w-xl rounded-md border border-slate-300 p-0" aria-label="Search"
-        data-controller="element">
-  <turbo-frame id="search_results_dialog" loading="lazy"
-               src="<%= podcast_search_results_path(podcast, turbo_frame: "search_results_dialog") %>"
-               data-controller="combobox-nav">
-  </turbo-frame>
+<dialog id="dialog" class="group w-full max-w-xl rounded-md border border-slate-300 p-0" aria-label="Search"
+        data-controller="element combobox-nav">
+  <div class="flex items-center px-4 border-b border-gray-100">
+    <%= form_with model: podcast.search, scope: "", method: :get, namespace: "dialog",
+          class: "flex-1 flex items-center gap-2",
+          data: {controller: "element",
+                action: "debounced:input->element#requestSubmit",
+                turbo_frame: "search_results"} do |form| %>
+      <%= inline_svg_tag "icons/search.svg", class: "pointer-events-none h-5 w-5 text-gray-400" %>
+      <%= form.label :query, class: "sr-only" %>
+      <%= form.text_field :query, class: "h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm underline aria-[activedescendant]:no-underline",
+            placeholder: "Search", autofocus: true,
+            data: {combobox_nav_target: "combobox"} %>
+    <% end %>
+
+    <form>
+      <button class="inline-flex items-center font-mono text-xs rounded-md border border-gray-300 p-1 outline-none focus:ring" formmethod="dialog">
+        <kbd><abbr title="Escape" class="no-underline">esc</abbr></kbd>
+      </button>
+    </form>
+  </div>
+
+  <turbo-frame id="search_results" target="_top"
+    class="block max-h-96 divide-y divide-slate-100 overflow-y-auto text-md text-gray-800"
+    data-combobox-nav-target="listbox"></turbo-frame>
 </dialog>

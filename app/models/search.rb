@@ -4,7 +4,6 @@ class Search < ApplicationModel
   attribute :podcast
   attribute :page
   attribute :query, :string
-  attribute :turbo_frame, :string
 
   def search_results
     page, paginated_episodes = pagy episodes

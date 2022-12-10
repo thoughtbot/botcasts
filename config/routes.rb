@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root to: "podcasts#index"
 
   resolve "Search" do |search|
-    [search.podcast, :search_results, {**@search}]
+    [search.podcast, :search_results, {**search}]
   end
 
   resolve "SearchResult" do |search_result|
