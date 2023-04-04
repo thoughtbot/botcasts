@@ -76,7 +76,7 @@ export default class extends ApplicationController {
 
 We use [lifecycle callbacks][] to create two methods based on the name of the
 [targets][]. The `shortcutTargetConnected` method will be invoked once the
-target is connected to the DOM, while the `shortcutTargetConnected` method will
+target is connected to the DOM, while the `shortcutTargetDisconnected` method will
 be invoked once the target is disconnected from the DOM.
 
 Anytime an element with a `data-hotkey-target="shortcut"` data attribute appears
