@@ -8,23 +8,27 @@ URL as query parameters, preserving essential functionality.
 
 TODO: Add demo
 
-- Wrap the pagination in a turbo-frame.
+- First, we wrap the pagination in a turbo-frame.
   - This is so we can capture each set of paginated results in a frame.
   - Adding and ID makes it so we replace the pagination with the next set of
     paginated links
   - Adding `target="_top"` makes it so clicking on any of the links withing the
     `turbo-frame` replaces the whole page. This is important because there are
 links to episodes in there.
+
 - Add a nested `turbo-frame` to load the next set of results.
-  - `loading: "lazy"` means it won't fire off an event until it's visible.
-  - `data-turbo-action` means it will be replaced with the response.
-  - TODO: Why do we also have a controller to replace the children, if we're
-    using `replace`?
-  - I think this is because we could keep nesting `turbo-frames` within one
+  - The`loading: "lazy"` means it won't fire off an event until it's visible.
+  - `data-turbo-action: replace` means it will update the browser's navigation
+    history. This means that the query string will be appended to the URL, and
+clicking the backbutton
+  - TODO: Why do we also have a controller to replace the children, instead of
+    using replace?
+    - I am thinking of streams. A frame is already being replaced.
+    - I think this is because we could keep nesting `turbo-frames` within one
     another. Each paginated result would get nested in the previous
-`turbo-frame`. By replacing the `turbo-frame`, we end up with one `turbo-frame`
-on the bottom of the page that gets replaces with the new paginated results and
-a new `turbo-frame` for the next set.
+    `turbo-frame`. By replacing the `turbo-frame`, we end up with one `turbo-frame`
+    on the bottom of the page that gets replaces with the new paginated results and
+    a new `turbo-frame` for the next set.
 
 ```diff
 --- a/app/views/episodes/index.html.erb
@@ -67,6 +71,20 @@ a new `turbo-frame` for the next set.
  <% end %>
 ```
 
+- The controller simply replaces itself with its children
+  - This essentially makes it so we don't infinitely next the results.
+
+```js
+import ApplicationController from "controllers/application_controller"
+
+export default class extends ApplicationController {
+  replaceWithChildren() {
+    this.element.replaceWith(...this.element.children)
+  }
+}
+```
+
+- We do the same thing with the search results.
 
 ```diff
 --- a/app/views/search_results/index.html.erb
@@ -106,6 +124,7 @@ a new `turbo-frame` for the next set.
    </div>
  <% end %>
 ```
+
 ---
 
 We set `[data-turbo-action]` to `replace` in order to [_replace_][]
@@ -118,14 +137,5 @@ but instead would navigate to the previously visited page.
 [_replace_]: https://turbo.hotwired.dev/handbook/drive#application-visits
 
 
-```js
-import ApplicationController from "controllers/application_controller"
-
-export default class extends ApplicationController {
-  replaceWithChildren() {
-    this.element.replaceWith(...this.element.children)
-  }
-}
-```
 
 
