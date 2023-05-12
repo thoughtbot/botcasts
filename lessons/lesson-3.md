@@ -6,7 +6,7 @@ pagination system by seamlessly replacing it with an infinite scroll feature.
 Additionally, we'll ensure that the page numbers continue to be appended to the
 URL as query parameters, preserving essential functionality.
 
-TODO: Add demo
+![Demo of infinite scroll](./assets/lesson-3/demo.gif)
 
 First, we wrap the pagination in a `turbo-frame` with and `id`. This will allow
 us to replace the pagination links with the next set of paginated links as the
