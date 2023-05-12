@@ -1,6 +1,6 @@
 # Lesson 4: Typeahead Search
 
-TODO: Add demo
+![Demo of typeahead search](./assets/lesson-4/demo.gif)
 
 Since the `<form>` will be making rapid submissions and those submissions will
 result in a sequence of Turbo Drive visits, we'll want to render the `<form>`
