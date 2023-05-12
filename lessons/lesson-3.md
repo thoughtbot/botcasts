@@ -8,27 +8,21 @@ URL as query parameters, preserving essential functionality.
 
 TODO: Add demo
 
-- First, we wrap the pagination in a turbo-frame.
-  - This is so we can capture each set of paginated results in a frame.
-  - Adding and ID makes it so we replace the pagination with the next set of
-    paginated links
-  - Adding `target="_top"` makes it so clicking on any of the links withing the
-    `turbo-frame` replaces the whole page. This is important because there are
-links to episodes in there.
+First, we wrap the pagination in a `turbo-frame` with and `id`. This will allow
+us to replace the pagination links with the next set of paginated links as the
+user navigates through the results. Additionally, it's important to add
+`target="_top"` to the links within the `turbo-frame`. This ensures that
+clicking on any of the links within the frame will replace the whole page, and
+not just the contents of the frame. This is necessary because are links to
+episodes within the paginated results.
 
-- Add a nested `turbo-frame` to load the next set of results.
-  - The`loading: "lazy"` means it won't fire off an event until it's visible.
-  - `data-turbo-action: replace` means it will update the browser's navigation
-    history. This means that the query string will be appended to the URL, and
-clicking the backbutton
-  - TODO: Why do we also have a controller to replace the children, instead of
-    using replace?
-    - I am thinking of streams. A frame is already being replaced.
-    - I think this is because we could keep nesting `turbo-frames` within one
-    another. Each paginated result would get nested in the previous
-    `turbo-frame`. By replacing the `turbo-frame`, we end up with one `turbo-frame`
-    on the bottom of the page that gets replaces with the new paginated results and
-    a new `turbo-frame` for the next set.
+Next, we need to add a nested `turbo-frame` to load the next set of results. By
+adding `loading: "lazy"`, we ensure that the frame won't fire off an event until
+it's visible. This helps to improve performance by preventing all results from
+being loaded on the first page load. Additionally, we can use
+`data-turbo-action: replace` to update the browser's navigation history. This
+means that the query string will be appended to the URL, and clicking the back
+button will work as expected.
 
 ```diff
 --- a/app/views/episodes/index.html.erb
@@ -71,10 +65,13 @@ clicking the backbutton
  <% end %>
 ```
 
-- The controller simply replaces itself with its children
-  - This essentially makes it so we don't infinitely next the results.
+We introduce a new `element_controller` that will be responsible for replacing
+the `turbo-frame` with a new set of results and pagination. By calling
+replaceWithChildren(), the controller's element is removed, but its children
+remain, effectively "unwrapping" the container element.
 
 ```js
+// app/javascript/controllers/element_controller.js
 import ApplicationController from "controllers/application_controller"
 
 export default class extends ApplicationController {
@@ -84,7 +81,8 @@ export default class extends ApplicationController {
 }
 ```
 
-- We do the same thing with the search results.
+We apply the same structural changes from the episode's index on the search
+result's page.
 
 ```diff
 --- a/app/views/search_results/index.html.erb
