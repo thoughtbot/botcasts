@@ -1,14 +1,13 @@
 # Lesson 4: Typeahead Search
 
+In this lesson we'll add typeahead search to the existing search page. As you
+start typing your search query, the page will automatically return results
+without the need to manually submit the form.
+
 ![Demo of typeahead search](./assets/lesson-4/demo.gif)
 
-Since the `<form>` will be making rapid submissions and those submissions will
-result in a sequence of Turbo Drive visits, we'll want to render the `<form>`
-with [data-turbo-action="replace"][] so that we _replace_ the current History
-entry, instead of creating a new entry for each and every keystroke.
-
-This commit extends the `element` Stimulus controller with a `requestSubmit`
-action.
+First we extend the `element` Stimulus controller with a `requestSubmit`
+action. This action simply submits the form the controller is attached to.
 
 ```diff
 --- a/app/javascript/controllers/element_controller.js
@@ -28,6 +27,11 @@ action.
 `[data-action="debounced:input->element#requestSubmit"]` to route every
 [input][] event to the `element#requestSubmit` action, which will submit the
 `<form>`.
+
+Since the `<form>` will be making rapid submissions and those submissions will
+result in a sequence of Turbo Drive visits, we'll want to render the `<form>`
+with [data-turbo-action="replace"][] so that we _replace_ the current History
+entry, instead of creating a new entry for each and every keystroke.
 
 ```diff
 --- a/app/views/search_results/index.html.erb
@@ -50,9 +54,10 @@ action.
                  <%= form.label :query, class: "sr-only" %>
 ```
 
-The `debounced:input` portion of the `[data-action]` attribute is refers to an
+The `debounced:input` portion of the `[data-action]` attribute refers to an
 event that's dispatched by the [debounced][] package, and is named after the
-built-in [input][] event.
+built-in [input][] event. This can be added by running `bin/importmap pin
+debounced`.
 
 ```diff
 --- a/config/importmap.rb
@@ -71,6 +76,9 @@ combined with an `[id]` attribute that's consistent across the requesting
 document and the response body, Turbo Drive will carry the element instance
 forward through the navigation, and backward through a history restoration.
 
+If we did not set the `data-turbo-permanent` attribute, the input would keep
+resetting as you type. Adding the attribute preserves its state.
+
 ```diff
 --- a/app/views/search_results/index.html.erb
 +++ b/app/views/search_results/index.html.erb
@@ -84,6 +92,12 @@ forward through the navigation, and backward through a history restoration.
                <button class="text-sm font-bold leading-6 text-pink-500 hover:text-pink-700 active:text-pink-900">
 ```
 
+We'll provide a `debounced` configuration to the page by rendering an in-line
+`<script type="module">` element that invokes `debounced.initialize` with a
+`JSON` object generated from values read from a call to
+[`config_for(:debounced)`][config_for]. In most environments, the `<form>` will
+wait 100 milliseconds between `input` events. In `test`, it'll submit
+immediately.
 
 ```diff
 --- a/app/views/layouts/application.html.erb
@@ -102,14 +116,6 @@ forward through the navigation, and backward through a history restoration.
    <body data-controller="hotkey">
 ```
 
- We'll provide a `debounced` configuration to the page by rendering an in-line
-`<script type="module">` element that invokes `debounced.initialize` with a
-`JSON` object generated from values read from a call to
-[`config_for(:debounced)`][config_for]. In most environments, the `<form>` will
-wait 100 milliseconds between `input` events. In `test`, it'll submit
-immediately.
-
-
 ```diff
 --- a/config/application.rb
 +++ b/config/application.rb
@@ -123,6 +129,7 @@ immediately.
 ```
 
 ```yml
+# config/debounced.yml
 shared:
   input:
     wait: 100
