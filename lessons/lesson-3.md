@@ -8,21 +8,21 @@ URL as query parameters, preserving essential functionality.
 
 ![Demo of infinite scroll](./assets/lesson-3/demo.gif)
 
-First, we wrap the pagination in a `turbo-frame` with and `id`. This will allow
-us to replace the pagination links with the next set of paginated links as the
-user navigates through the results. Additionally, it's important to add
-`target="_top"` to the links within the `turbo-frame`. This ensures that
+First, we wrap the pagination in a [Turbo Frame][] with and `id`. This will
+allow us to replace the pagination links with the next set of paginated links
+as the user navigates through the results. Additionally, it's important to add
+[`target="_top"`][2] to the links within the `turbo-frame`. This ensures that
 clicking on any of the links within the frame will replace the whole page, and
 not just the contents of the frame. This is necessary because are links to
 episodes within the paginated results.
 
 Next, we need to add a nested `turbo-frame` to load the next set of results. By
-adding `loading: "lazy"`, we ensure that the frame won't fire off an event until
-it's visible. This helps to improve performance by preventing all results from
-being loaded on the first page load. Additionally, we can use
-`data-turbo-action: replace` to update the browser's navigation history. This
-means that the query string will be appended to the URL, and clicking the back
-button will work as expected.
+adding [`loading: "lazy"`][3], we ensure that the frame won't fire off an event
+until it's visible. This helps to improve performance by preventing all results
+from being loaded on the first page load. Additionally, we can use
+[`data-turbo-action: replace`][4] to update the browser's navigation history.
+This means that the query string will be appended to the URL, and clicking the
+back button will work as expected.
 
 ```diff
 --- a/app/views/episodes/index.html.erb
@@ -122,18 +122,7 @@ result's page.
    </div>
  <% end %>
 ```
-
----
-
-We set `[data-turbo-action]` to `replace` in order to [_replace_][]
-visit history while scrolling. In other words, if the user were to click
-the back button, the browser would not navigate to the previous page,
-but instead would navigate to the previously visited page.
-
-[Turbo Frames]: https://turbo.hotwired.dev/handbook/frames
-[Stimulus]: https://stimulus.hotwired.dev
-[_replace_]: https://turbo.hotwired.dev/handbook/drive#application-visits
-
-
-
-
+[Turbo Frame]: https://turbo.hotwired.dev/handbook/frames
+[2]: https://turbo.hotwired.dev/reference/frames#html-attributes
+[3]: https://turbo.hotwired.dev/reference/frames#lazy-loaded-frame
+[4]: https://turbo.hotwired.dev/reference/frames#frame-that-promotes-navigations-to-visits
