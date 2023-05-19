@@ -119,9 +119,11 @@ f5f435b [GENERATED]: Initial Commit
 git push --force-with-lease
 ```
 
-7. Re-tag the lessons.
+7. [Re-tag][2] the lessons.
 
 ```sh
+./auto_tag.sh
 ```
 
 [1]: https://github.com/thoughtbot/botcasts/pulls
+[2]: https://github.com/joemasilotti/git-auto-tagger
