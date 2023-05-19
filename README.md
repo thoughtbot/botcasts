@@ -15,3 +15,7 @@ install dependencies and seed the database.
 
 Run `./bin/dev` to start the development server and then navigate to
 [http://localhost:3000](http://localhost:3000)
+
+## Contributing
+
+[Contributing](./CONTRIBUTING.md)
