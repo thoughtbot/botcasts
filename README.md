@@ -11,6 +11,12 @@ move on to the next lesson.
 If this is your first time running the application, run `./bin/setup` to
 install dependencies and seed the database.
 
+If you run into a `Tailwindcss::Commands::ExecutableNotFoundException: Cannot find the
+tailwindcss executable` error, you need to add your platform to `Gemfile.lock`. See \
+[this Stack Overflow] for more details.
+
+[this Stack Overflow]: https://stackoverflow.com/a/70720842
+
 ## 🚀 Getting Started
 
 Once you've setup the application locally, you can start the [lesson plan][1].
