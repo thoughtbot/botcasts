@@ -3,8 +3,11 @@
 **Hotwire-powered Podcast Player** 🔌
 
 This course works by introducing a series of failing tests that you must get to
-pass by introducing Hotwire patterns into the application. Once the tests pass,
-move on to the next lesson.
+pass by introducing Hotwire patterns into the application.
+
+For more Hotwire resources, check out our [blog posts].
+
+[blog posts]: https://thoughtbot.com/blog/tags/hotwire
 
 ## ⚙️  Setup
 
@@ -19,15 +22,17 @@ tailwindcss executable` error, you need to add your platform to `Gemfile.lock`. 
 
 ## 🚀 Getting Started
 
-Once you've setup the application locally, you can start the [lesson plan][1].
+Once you've setup the application locally, you are ready to start the [lesson plan][1].
 
-## 🏗 Local Development
+Once the tests pass, move on to the next lesson.
+
+## 🏗 Running the application
 
 Run `./bin/dev` to start the development server and then navigate to
-[http://localhost:3000](http://localhost:3000)
+[http://localhost:3000](http://localhost:3000).
 
 ## Contributing
 
-[Contributing](./CONTRIBUTING.md)
+Please see [Contributing](./CONTRIBUTING.md).
 
 [1]: ./lessons/README.md
