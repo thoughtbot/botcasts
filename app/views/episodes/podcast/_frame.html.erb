@@ -42,43 +42,6 @@
 
       <p class="mt-2 text-base leading-7 text-slate-700 lg:line-clamp-4"><%= podcast.description %></p>
     </section>
-
-    <section class="mt-10 lg:mt-12">
-      <h2 class="sr-only flex items-center font-mono text-sm font-medium leading-7 text-slate-900 lg:not-sr-only">
-        <%= inline_svg_tag "icons/graph.svg", class: "text-indigo-300 h-2.5 w-2.5" %>
-
-        <span class="ml-2.5">Listen</span>
-      </h2>
-
-      <div class="h-px bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0 lg:hidden"></div>
-
-      <ul role="list" class="mt-4 flex justify-center gap-10 text-base font-medium leading-7 text-slate-700 sm:gap-8 lg:flex-col lg:gap-4">
-        <li class="flex">
-          <a class="group flex items-center" aria-label="Spotify" href="/">
-            <%= inline_svg_tag "icons/spotify.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
-            <span class="hidden sm:ml-3 sm:block">Spotify</span>
-          </a>
-        </li>
-        <li class="flex">
-          <a class="group flex items-center" aria-label="Apple Podcast" href="/">
-            <%= inline_svg_tag "icons/apple_podcasts.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
-            <span class="hidden sm:ml-3 sm:block">Apple Podcast</span>
-          </a>
-        </li>
-        <li class="flex">
-          <a class="group flex items-center" aria-label="Overcast" href="/">
-            <%= inline_svg_tag "icons/overcast.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
-            <span class="hidden sm:ml-3 sm:block">Overcast</span>
-          </a>
-        </li>
-        <li class="flex">
-          <a class="group flex items-center" aria-label="RSS Feed" href="/">
-            <%= inline_svg_tag "icons/rss.svg", class: "h-8 w-8 fill-slate-400 group-hover:fill-slate-600" %>
-            <span class="hidden sm:ml-3 sm:block">RSS Feed</span>
-          </a>
-        </li>
-      </ul>
-    </section>
   </div>
 </header>
 

@@ -35,10 +35,6 @@ module Episodes
       within :banner do
         assert_link episode.podcast.title, href: podcast_episodes_path(episode.podcast)
         assert_link text: episode.podcast.title, href: podcast_episodes_path(episode.podcast)
-        assert_link "Spotify"
-        assert_link "Apple Podcast"
-        assert_link "Overcast"
-        assert_link "RSS Feed"
         assert_selector :section, "About", text: episode.podcast.description, count: 1
       end
       within :contentinfo do
@@ -153,10 +149,6 @@ module Episodes
       within :banner do
         assert_link episode.podcast.title, href: podcast_episodes_path(episode.podcast)
         assert_link text: episode.podcast.title, href: podcast_episodes_path(episode.podcast)
-        assert_link "Spotify"
-        assert_link "Apple Podcast"
-        assert_link "Overcast"
-        assert_link "RSS Feed"
         assert_selector :section, "About", text: episode.podcast.description
       end
       within :contentinfo do
