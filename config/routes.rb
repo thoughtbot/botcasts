@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     [search_result.podcast, search_result.episode]
   end
 
-  mount GoodJob::Engine => 'good_job'
+  mount GoodJob::Engine => "good_job"
 end

@@ -15,7 +15,7 @@ FileUtils.chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
   vips  = MakeMakefile.find_executable('vips')
-  if !vips
+  if !vips && !ENV["CI"]
     puts "VIPS is not installed.\n"
     printf "See https://www.libvips.org/install.html for install instructions.\n"
     exit 1

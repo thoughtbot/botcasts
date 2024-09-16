@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CreateGoodJobProcessLockIndexes < ActiveRecord::Migration[8.0]
   disable_ddl_transaction!
 
@@ -7,23 +8,23 @@ class CreateGoodJobProcessLockIndexes < ActiveRecord::Migration[8.0]
       dir.up do
         unless connection.index_name_exists?(:good_jobs, :index_good_jobs_on_priority_scheduled_at_unfinished_unlocked)
           add_index :good_jobs, [:priority, :scheduled_at],
-                    order: { priority: "ASC NULLS LAST", scheduled_at: :asc },
-                    where: "finished_at IS NULL AND locked_by_id IS NULL",
-                    name: :index_good_jobs_on_priority_scheduled_at_unfinished_unlocked,
-                    algorithm: :concurrently
+            order: {priority: "ASC NULLS LAST", scheduled_at: :asc},
+            where: "finished_at IS NULL AND locked_by_id IS NULL",
+            name: :index_good_jobs_on_priority_scheduled_at_unfinished_unlocked,
+            algorithm: :concurrently
         end
 
         unless connection.index_name_exists?(:good_jobs, :index_good_jobs_on_locked_by_id)
           add_index :good_jobs, :locked_by_id,
-                    where: "locked_by_id IS NOT NULL",
-                    name: :index_good_jobs_on_locked_by_id,
-                    algorithm: :concurrently
+            where: "locked_by_id IS NOT NULL",
+            name: :index_good_jobs_on_locked_by_id,
+            algorithm: :concurrently
         end
 
         unless connection.index_name_exists?(:good_job_executions, :index_good_job_executions_on_process_id_and_created_at)
           add_index :good_job_executions, [:process_id, :created_at],
-                    name: :index_good_job_executions_on_process_id_and_created_at,
-                    algorithm: :concurrently
+            name: :index_good_job_executions_on_process_id_and_created_at,
+            algorithm: :concurrently
         end
       end
 
