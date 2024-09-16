@@ -56,10 +56,10 @@ Now we can build the controller.
 
 ```js
 // app/javascript/controllers/hotkey_controller.js
-import ApplicationController from "controllers/application_controller"
+import { Controller } from '@hotwired/stimulus'
 import { install, uninstall } from "@github/hotkey"
 
-export default class extends ApplicationController {
+export default class extends Controller {
   static targets = ["shortcut"]
 
   shortcutTargetConnected(target) {
@@ -83,7 +83,7 @@ Anytime an element with a `data-hotkey-target="shortcut"` data attribute appears
 on the page, this controller will enable that element to be accessed via the
 hotkey. Additionally, we add a `aria-keyshortcuts` attribute to the element and
 set the value to whatever the `hotkey` attribute is. In this case, that's
-"Meta+k". We do this in an effort to exposes the existence of the shortcut to
+"Meta+k". We do this in an effort to expose the existence of the shortcut to
 assistive technologies so the presence of the shortcut can be communicated to
 its users.
 
@@ -132,6 +132,16 @@ You'll note that we add `[data-hotkey-target="shortcut"]` to an existing
 anchor link. The [@github/hotkey][] library works by triggering a focus event on
 form fields, or a click event on other elements. In this case, hitting `Meta+k`
 will automatically click the link to the search page.
+
+### Check in
+
+To complete this lesson:
+
+- run `./bin/rails test` to verify the tests pass
+- press ⌘ k anywhere in the episodes list page to verify the search shortcut works as expected
+  note: using `Control` instead of ⌘ should work as well for non-Mac users
+
+When you're ready, move on to the next lesson by running `./ta/start-lesson 2`.
 
 [javascript_importmap_tags]: https://github.com/rails/importmap-rails#preloading-pinned-modules
 [importmap]: https://github.com/WICG/import-maps
