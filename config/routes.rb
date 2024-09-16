@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resolve "SearchResult" do |search_result|
     [search_result.podcast, search_result.episode]
   end
+
+  mount GoodJob::Engine => 'good_job'
 end
