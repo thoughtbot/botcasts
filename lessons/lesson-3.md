@@ -122,6 +122,16 @@ result's page.
    </div>
  <% end %>
 ```
+### Check in
+
+To complete this lesson:
+
+- run `./bin/rails test` to verify the tests pass
+- scroll down the episodes and verify that the page numbers continue to be appended to the
+URL as query parameters
+
+When you're ready, move on to the next lesson by running `./ta/start-lesson 4`.
+
 [Turbo Frame]: https://turbo.hotwired.dev/handbook/frames
 [2]: https://turbo.hotwired.dev/reference/frames#html-attributes
 [3]: https://turbo.hotwired.dev/reference/frames#lazy-loaded-frame
