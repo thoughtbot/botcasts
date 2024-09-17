@@ -109,7 +109,7 @@ immediately.
 +    <%= javascript_tag type: "module", nonce: true do %>
 +      import debounced from "debounced"
 +
-+      debounced.initialize(<%= raw Rails.configuration.debounced.to_json %>)
++      debounced.initialize(this, <%= raw Rails.configuration.debounced.to_json %>)
 +    <% end %>
    </head>
  
@@ -139,8 +139,22 @@ test:
     wait: 0
 ```
 
+### Check in
+
+To complete this lesson:
+
+- run `./bin/rails test` to verify the tests pass
+- press ⌘ k anywhere in the page and type a query, for example, "ruby". Verify the search results are returned without having to submit the form
+
+And this marks the end of building a Hotwire-powered Podcast Player Hotwire 🎓
+
+To continue mastering your Hotwire skills,
+check out our [Hotwire resources] and [blog posts].
+
 [input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
 [data-turbo-permanent]: https://turbo.hotwired.dev/handbook/building#persisting-elements-across-page-loads
 [debounced]: https://github.com/hopsoft/debounced#why
 [config_for]: https://edgeapi.rubyonrails.org/classes/Rails/Application.html#method-i-config_for
 [data-turbo-action="replace"]: https://turbo.hotwired.dev/handbook/drive#application-visits
+[Hotwire resources]: https://thoughtbot.com/services/hotwire-stimulus-turbo-frontend-development
+[blog posts]: https://thoughtbot.com/blog/tags/hotwire
