@@ -8,7 +8,7 @@ URL as query parameters, preserving essential functionality.
 
 ![Demo of infinite scroll](./assets/lesson-3/demo.gif)
 
-First, we wrap the pagination in a [Turbo Frame][] with and `id`. This will
+First, we wrap the pagination in a [Turbo Frame][] with an `id`. This will
 allow us to replace the pagination links with the next set of paginated links
 as the user navigates through the results. Additionally, it's important to add
 [`target="_top"`][2] to the links within the `turbo-frame`. This ensures that
