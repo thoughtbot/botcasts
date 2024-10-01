@@ -5,6 +5,9 @@
 This course works by introducing a series of failing tests that you must get to
 pass by introducing Hotwire patterns into the application.
 
+The app starts as a Turbo-less Rails app. The goal is as you complete the lessons,
+you'll make it more iteractive using Hotwire.
+
 For more Hotwire resources, check out our [blog posts].
 
 [blog posts]: https://thoughtbot.com/blog/tags/hotwire
@@ -14,24 +17,21 @@ For more Hotwire resources, check out our [blog posts].
 If this is your first time running the application, run `./bin/setup` to
 install dependencies and seed the database.
 
-[issue]: https://stackoverflow.com/a/70720842
-
 ## 🏗 Running the application
 
 Run `./bin/dev` to start the development server and then navigate to
 [http://localhost:3000](http://localhost:3000).
 
-Note: Running `./bin/dev` will execute the background jobs to import the
-episodes scheduled in the setup step above. It will take a few minutes.
+Note: Running `./bin/dev` will enqueue background jobs to import the
+episodes. It will take a few minutes.
 If you run into issues due to a podcast or episode not being
-found, see the jobs statuses on http://localhost:3000/good_job.
-Once they are finished, the episodes should be accessible in the UI.
+found in the UI, check the jobs statuses on http://localhost:3000/good_job.
 
 ## 🚀 Getting Started
 
 Once you've setup the application locally, you are ready to start the [lesson plan][1].
 
-Once the tests pass, move on to the next lesson.
+We recommend getting the tests to pass for each lesson before moving on to a new one.
 
 ## Contributing
 
