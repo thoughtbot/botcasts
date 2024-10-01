@@ -130,7 +130,7 @@ To complete this lesson:
 - scroll down the episodes and verify that the page numbers continue to be appended to the
 URL as query parameters
 
-When you're ready, move on to the next lesson by running `./ta/start-lesson 4`.
+When you're ready, move on to the [next lesson](./lesson-4.md).
 
 [Turbo Frame]: https://turbo.hotwired.dev/handbook/frames
 [2]: https://turbo.hotwired.dev/reference/frames#html-attributes
