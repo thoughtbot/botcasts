@@ -29,7 +29,7 @@ the episode that was just clicked.
 You'll also note that we add `target: "_top"` to the `<turbo-frame>`. Prior to
 that change, any `<a>` or `<form>` elements nested within `<div id="audio">`
 would drive the entire page. For example, clicking the Podcast title in the
-audio player navigating the whole page to the Podcast in question.
+audio player navigates the whole page to the Podcast in question.
 
 Now that those `<a>` and `<form>` elements are nested underneath a
 `<turbo-frame>`, their navigations would get "caught" or "trapped", and would
@@ -149,6 +149,7 @@ In short, this just ensures we only load the audio once, even if the play button
 is clicked multiple times.
 
 ```diff
++++ b/app/javascript/controllers/application.js
 +application.registerActionOption("reload", ({ event, value }) => {
 +  if (event.type == "submit") {
 +    const { submitter, target: form } = event
@@ -203,7 +204,7 @@ export default class extends ApplicationController {
 --- a/app/views/episodes/show.html.erb
 +++ b/app/views/episodes/show.html.erb
 -      <%= audio_tag @episode.audio, id: dom_id(@episode, :audio), class: "w-full", controls: true %>
-+      <%= audio_tag @episode.audio, id: dom_id(@episode, :audio), class: "w-full", controls: true
++      <%= audio_tag @episode.audio, id: dom_id(@episode, :audio), class: "w-full", controls: true,
 +            data: {controller: "player", action: "loadeddata->player#play"} %>
 ```
 
@@ -274,12 +275,23 @@ play state. This works because the `playerOutlet` is an instance of a
 `player_controller`, which defines a `toggle()` method.
 
 ```erb
+<%# app/views/episodes/_episode.html.erb %>
 data-play-button-player-outlet="#<%= dom_id(episode, :audio) %>"
 ```
 
 The `play-button` controller synchronizes the `<button>` element's
 `[aria-controls]` and `[aria-pressed]` attribute state with any `player`-side
 state changes, and routes `click` events to its own `play-button#toggle` action.
+
+### Check in
+
+To complete this lesson:
+
+- run `./bin/rails test` to verify the tests pass
+- click on the play buttons in the UI and verify the the audio player is coupled with the multiple
+play buttons on the page
+
+When you're ready, move on to the [next lesson](./lesson-3.md).
 
 [data-turbo-permanent]: https://turbo.hotwired.dev/handbook/building#persisting-elements-across-page-loads
 [turbo-frame]: https://turbo.hotwired.dev/handbook/frames
