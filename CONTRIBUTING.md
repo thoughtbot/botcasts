@@ -46,7 +46,7 @@ pick b86afaa Lesson 1: Our first lines of JavaScript
 pick 2fc0b6b Lesson 2: The Audio Player
 pick cf2942e Lesson 3: Infinite scroll
 pick dfaeb73 Lesson 4: Typeahead Search
-pick 0d97e49 Update setup script (#18) # <- We need to move this
+pick 0d97e49 Update Tutorial Assistant on setup (#18) # <- We need to move this
 ```
 
 4. Move the commit to **before** the "Getting Started" commit.
@@ -71,7 +71,7 @@ pick 66255b3 Extract `PodcastScoped` concern
 pick 27e8306 Episode Search
 pick 4276531 [BACKPORT]: Promote lazily-loaded Turbo Frame navigation
 pick 304a037 Build assets during setup (#16)
-pick 0d97e49 Update setup script (#18) # <- Move it before "Getting Started"
+pick 0d97e49 Update Tutorial Assistant on setup (#18) # <- Move it before "Getting Started"
 pick a3ada0f Getting Started
 pick b86afaa Lesson 1: Our first lines of JavaScript
 pick 2fc0b6b Lesson 2: The Audio Player
@@ -91,7 +91,7 @@ f805411 (HEAD -> main) Lesson 4: Typeahead Search
 83f2ae3 Lesson 2: The Audio Player
 45624d1 Lesson 1: Our first lines of JavaScript
 14e6e70 Getting Started
-0a4b7a9 Update setup script (#18) # <- The commit is in the correct spot
+0a4b7a9 Update Tutorial Assistant on setup (#18) # <- The commit is in the correct spot
 304a037 Build assets during setup (#16)
 4276531 [BACKPORT]: Promote lazily-loaded Turbo Frame navigation
 27e8306 Episode Search
