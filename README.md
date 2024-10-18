@@ -20,9 +20,10 @@ Run `./bin/dev` to start the development server and then navigate to
 
 Note: Running `./bin/dev` will enqueue background jobs to import the
 episodes. It will take a few minutes.
+
 If you run into issues due to a podcast or episode not being
 found when accessing the app, check the jobs statuses
-on http://localhost:3000/good_job.
+on [http://localhost:3000/good_job](http://localhost:3000/good_job).
 
 ## 🚀 Getting Started
 
