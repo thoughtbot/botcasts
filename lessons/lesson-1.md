@@ -83,7 +83,7 @@ Anytime an element with a `data-hotkey-target="shortcut"` data attribute appears
 on the page, this controller will enable that element to be accessed via the
 hotkey. Additionally, we add a `aria-keyshortcuts` attribute to the element and
 set the value to whatever the `hotkey` attribute is. In this case, that's
-"Meta+k". We do this in an effort to expose the existence of the shortcut to
+"Meta+k". We do this in an effort to exposes the existence of the shortcut to
 assistive technologies so the presence of the shortcut can be communicated to
 its users.
 
@@ -132,8 +132,6 @@ You'll note that we add `[data-hotkey-target="shortcut"]` to an existing
 anchor link. The [@github/hotkey][] library works by triggering a focus event on
 form fields, or a click event on other elements. In this case, hitting `Meta+k`
 will automatically click the link to the search page.
-
-When you're ready, move on to the [next lesson](./lesson-2.md).
 
 [javascript_importmap_tags]: https://github.com/rails/importmap-rails#preloading-pinned-modules
 [importmap]: https://github.com/WICG/import-maps
