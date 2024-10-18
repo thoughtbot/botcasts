@@ -28,8 +28,6 @@ on http://localhost:3000/good_job.
 
 Once you've setup the application locally, you are ready to start the [lesson plan][1].
 
-We recommend getting the tests to pass for each lesson before moving on to a new one.
-
 ## Contributing
 
 Please see [Contributing](./CONTRIBUTING.md).
