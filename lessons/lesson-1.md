@@ -133,14 +133,6 @@ anchor link. The [@github/hotkey][] library works by triggering a focus event on
 form fields, or a click event on other elements. In this case, hitting `Meta+k`
 will automatically click the link to the search page.
 
-### Check in
-
-To complete this lesson:
-
-- run `./bin/rails test` to verify the tests pass.
-- press ⌘ k anywhere in the episodes list page to verify the search shortcut works as
-  expected. Note: using Control instead of ⌘ should work as well for non-Mac users.
-
 When you're ready, move on to the [next lesson](./lesson-2.md).
 
 [javascript_importmap_tags]: https://github.com/rails/importmap-rails#preloading-pinned-modules
