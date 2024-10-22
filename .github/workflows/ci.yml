@@ -17,10 +17,9 @@ jobs:
           --health-timeout 2s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - uses: "ruby/setup-ruby@v1"
         with:
-          ruby-version: 3.1.2
           bundler-cache: true
 
       - name: Install libvips
@@ -39,7 +38,7 @@ jobs:
           bin/setup
           bin/rails standard test:all
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Capybara screenshots
