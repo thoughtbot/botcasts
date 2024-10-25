@@ -139,8 +139,15 @@ test:
     wait: 0
 ```
 
+And this marks the end of building a Hotwire-powered Podcast Player 🎓
+
+To continue mastering your Hotwire skills,
+check out our [Hotwire resources][] and [blog posts][].
+
 [input]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event
 [data-turbo-permanent]: https://turbo.hotwired.dev/handbook/building#persisting-elements-across-page-loads
 [debounced]: https://github.com/hopsoft/debounced#why
 [config_for]: https://edgeapi.rubyonrails.org/classes/Rails/Application.html#method-i-config_for
 [data-turbo-action="replace"]: https://turbo.hotwired.dev/handbook/drive#application-visits
+[Hotwire resources]: https://thoughtbot.com/services/hotwire-stimulus-turbo-frontend-development
+[blog posts]: https://thoughtbot.com/blog/tags/hotwire
