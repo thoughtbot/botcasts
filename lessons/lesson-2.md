@@ -29,7 +29,7 @@ the episode that was just clicked.
 You'll also note that we add `target: "_top"` to the `<turbo-frame>`. Prior to
 that change, any `<a>` or `<form>` elements nested within `<div id="audio">`
 would drive the entire page. For example, clicking the Podcast title in the
-audio player navigating the whole page to the Podcast in question.
+audio player navigates the whole page to the Podcast in question.
 
 Now that those `<a>` and `<form>` elements are nested underneath a
 `<turbo-frame>`, their navigations would get "caught" or "trapped", and would
@@ -274,6 +274,7 @@ play state. This works because the `playerOutlet` is an instance of a
 `player_controller`, which defines a `toggle()` method.
 
 ```erb
+<%# app/views/episodes/_episode.html.erb %>
 data-play-button-player-outlet="#<%= dom_id(episode, :audio) %>"
 ```
 
