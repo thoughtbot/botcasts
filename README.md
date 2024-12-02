@@ -25,7 +25,9 @@ If you run into issues due to a podcast or episode not being
 found when accessing the app, check the jobs statuses
 on [http://localhost:3000/good_job](http://localhost:3000/good_job).
 
-## 🚀 Getting Started
+## 🚀 Hotwire Essentials: Getting started
+
+Hotwire Essentials is a tutorial that takes you step-by-step through building a functional podcast player that teaches you how to apply Hotwire patterns to solve real-world problems. Each lesson builds on the previous one, with challenges that guide you through Turbo's capabilities, Stiumlus controllers, and best practices for server-driven interactivity.
 
 Once you've setup the application locally, you are ready to start the [lesson plan][].
 
