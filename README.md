@@ -12,6 +12,14 @@ it using [Hotwire][].
 If this is your first time running the application, run `./bin/setup` to
 install dependencies and seed the database.
 
+In case you get the error message saying:
+```shell
+checking for vips... no
+VIPS is not installed.
+See https://www.libvips.org/install.html for install instructions.
+```
+visit the [VIPS library](https://www.libvips.org/install.html) installation page and follow the instructions depending your operating system.
+
 ## 🏗 Running the application
 
 Run `./bin/dev` to start the development server and then navigate to
