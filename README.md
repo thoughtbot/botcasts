@@ -7,7 +7,12 @@ it using [Hotwire][].
 
 [Hotwire]: https://hotwired.dev
 
-## ⚙️  Setup
+## Requirements
+
+- Ruby `3.3.0`
+- [libvips](https://www.libvips.org/install.html)
+
+## ⚙️ Setup
 
 If this is your first time running the application, run `./bin/setup` to
 install dependencies and seed the database.
