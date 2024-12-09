@@ -7,18 +7,15 @@ it using [Hotwire][].
 
 [Hotwire]: https://hotwired.dev
 
-## ⚙️  Setup
+## Requirements
+
+- Ruby `3.3.0`
+- [libvips](https://www.libvips.org/install.html)
+
+## ⚙️ Setup
 
 If this is your first time running the application, run `./bin/setup` to
 install dependencies and seed the database.
-
-In case you get the error message saying:
-```shell
-checking for vips... no
-VIPS is not installed.
-See https://www.libvips.org/install.html for install instructions.
-```
-visit the [VIPS library](https://www.libvips.org/install.html) installation page and follow the instructions depending on your operating system.
 
 ## 🏗 Running the application
 
