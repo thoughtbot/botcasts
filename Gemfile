@@ -53,6 +53,7 @@ gem "inline_svg"
 gem "pagy"
 gem "rss", github: "ruby/rss"
 gem "nice_partials", github: "bullet-train-co/nice_partials"
+gem 'openssl', git: 'https://github.com/ruby/openssl'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
