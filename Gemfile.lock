@@ -111,6 +111,12 @@ GIT
       zeitwerk (~> 2.6)
 
 GIT
+  remote: https://github.com/ruby/openssl
+  revision: 82e80ee00ea02916fd42d695b5198f0a260ed552
+  specs:
+    openssl (4.0.0.pre)
+
+GIT
   remote: https://github.com/ruby/rss.git
   revision: 6284574bb034773c57f402aa9fc725993570fe6a
   specs:
@@ -402,6 +408,7 @@ DEPENDENCIES
   inline_svg
   jbuilder
   nice_partials!
+  openssl!
   pagy
   pg (~> 1.1)
   propshaft
